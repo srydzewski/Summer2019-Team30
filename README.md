@@ -1,4 +1,4 @@
-# Project Zeedonk
+# Project Whaleshop
 
 ## Setup
 1. [Install npm](https://www.npmjs.com/get-npm). This is a package manager

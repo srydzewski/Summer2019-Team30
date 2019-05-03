@@ -24,8 +24,8 @@ limitations under the License.
   -->
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.github.zeedonk</groupId>
-  <artifactId>zeedonk</artifactId>
+  <groupId>com.github.whaleshop</groupId>
+  <artifactId>whaleshop</artifactId>
   <!-- [BUILD]: Change the version to update a different build. -->
   <version>dev</version>
   <packaging>war</packaging>
@@ -63,6 +63,20 @@ limitations under the License.
       <version>1.52.0</version>
       <scope>compile</scope>
     </dependency>
+
+    <!-- Google Dependencies -->
+
+<dependency>
+  <groupId>com.google.protobuf</groupId>
+  <artifactId>protobuf-java</artifactId>
+  <version>3.7.1</version>
+</dependency>
+
+<dependency>
+  <groupId>com.google.guava</groupId>
+  <artifactId>guava</artifactId>
+  <version>27.1-jre</version>
+</dependency>
   </dependencies>
 
   <build>
@@ -82,9 +96,9 @@ limitations under the License.
               <goal>copy-resources</goal>
             </goals>
             <configuration>
-              <!-- [BUILD]: Update output directory to zeedonk-[build] when
+              <!-- [BUILD]: Update output directory to whaleshop-[build] when
               changing builds. -->
-              <outputDirectory>target/zeedonk-dev</outputDirectory>
+              <outputDirectory>target/whaleshop-dev</outputDirectory>
               <resources>
                 <resource>
                   <directory>../client/build</directory>
@@ -95,6 +109,26 @@ limitations under the License.
           </execution>
         </executions>
       </plugin>
+      <plugin>
+  <groupId>com.github.os72</groupId>
+  <artifactId>protoc-jar-maven-plugin</artifactId>
+  <version>3.7.0.2</version>
+  <executions>
+    <execution>
+      <phase>generate-sources</phase>
+      <goals>
+        <goal>run</goal>
+      </goals>
+      <configuration>
+        <addProtoSources>all</addProtoSources>
+        <includeMavenTypes>direct</includeMavenTypes>
+        <inputDirectories>
+          <include>../shared</include>
+        </inputDirectories>
+      </configuration>
+    </execution>
+  </executions>
+</plugin>
     </plugins>
   </build>
 </project>

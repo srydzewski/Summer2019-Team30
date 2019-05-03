@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.github.whaleshop.proto";
+
+// A user entity that is stored in Datastore.
+// Next id: 2
+message User {
+  // The key used to uniquely identify a user.
+  string email = 1;
+}
