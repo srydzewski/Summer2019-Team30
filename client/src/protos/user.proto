@@ -9,3 +9,9 @@ message User {
   // The key used to uniquely identify a user.
   string email = 1;
 }
+
+// The user's login status.
+// Next id: 2
+message LoginStatus {
+  bool is_logged_in = 1;
+}

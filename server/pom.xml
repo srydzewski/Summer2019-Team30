@@ -123,7 +123,7 @@ limitations under the License.
         <addProtoSources>all</addProtoSources>
         <includeMavenTypes>direct</includeMavenTypes>
         <inputDirectories>
-          <include>../shared</include>
+          <include>../client/src/protos</include>
         </inputDirectories>
       </configuration>
     </execution>

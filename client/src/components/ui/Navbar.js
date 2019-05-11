@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, withRouter } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 /**
  * The common navbar ui used throughout the application.
@@ -19,9 +19,12 @@ const Navbar = props => {
           <li>
             <NavLink to='/about'>About Our Team</NavLink>
           </li>
+          <li>
+            <NavLink to='/login'>Sign In </NavLink>
+          </li>
         </ul>
       </nav>
     </div>
   );
 };
-export default withRouter(Navbar);
+export default Navbar;
