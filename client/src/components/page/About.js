@@ -4,18 +4,18 @@ import { connect } from 'react-redux';
 import TeamIntroCard from '../ui/TeamIntroCard';
 
 /**
- * @param member A single member that exists in the root redux store.
- * @param member.id A unique id that identifies a member object.
- * @param member.name The name of the member.
- * @param member.description A description of the member.
- * @return The html representation of a member's introduction.
+ * @param contributor A single contributor that exists in the root redux store.
+ * @param contributor.id The unique id of the contributor.
+ * @param contributor.name The name of the contributor.
+ * @param contributor.description A description of the contributor.
+ * @return The html representation of a contributor's introduction.
  */
-const createMemberUi = function(member) {
+const createMemberUi = function(contributor) {
   return (
     <TeamIntroCard
-      key={member.id}
-      name={member.name}
-      description={member.description}
+      key={contributor.id}
+      name={contributor.name}
+      description={contributor.description}
     />
   );
 };
@@ -23,15 +23,17 @@ const createMemberUi = function(member) {
 /** Creates the /about page. */
 class About extends Component {
   render() {
-    const { members, memberKeys } = this.props;
+    const { contributors } = this.props;
 
-    // Loops through each team member and creates a ui card.
-    const membersUi = memberKeys.map(id => createMemberUi(members[id]));
+    // Loops through each project contributor and creates a ui card.
+    const contributorsListUi = contributors.keys.map(id =>
+      createMemberUi(contributors[id])
+    );
 
     return (
       <div className='container'>
         <h1 className='center'>About Our Team</h1>
-        {membersUi}
+        {contributorsListUi}
       </div>
     );
   }
@@ -40,13 +42,12 @@ class About extends Component {
 /**
  * Connects the About class to the redux Root storage.
  * @param state The state of the root storage.
- * @param state.aboutMembers The members displayed in the About page.
- * @param state.aboutMemberKeys The keys of all members.
+ * @param state.contributors The members displayed in the About page.
+ * @param state.contributorKeys The keys of all members.
  */
 const mapStateToProps = state => {
   return {
-    members: state.aboutMembers,
-    memberKeys: state.aboutMemberKeys
+    contributors: state.contributors
   };
 };
 
