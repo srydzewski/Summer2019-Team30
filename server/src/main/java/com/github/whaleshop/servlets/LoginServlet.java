@@ -16,13 +16,13 @@
 
 package com.github.whaleshop.servlets;
 
+import com.github.whaleshop.proto.User;
 import java.io.IOException;
+import java.util.logging.Logger;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.logging.Logger;
-import com.github.whaleshop.proto.User;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {

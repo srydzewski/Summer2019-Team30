@@ -16,14 +16,14 @@
 
 package com.github.whaleshop.servlets;
 
+import com.github.whaleshop.proto.LoginStatus;
+import com.google.protobuf.util.JsonFormat;
 import java.io.IOException;
+import java.util.logging.Logger;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.logging.Logger;
-import com.github.whaleshop.proto.LoginStatus;
-import com.google.protobuf.util.JsonFormat;
 
 @WebServlet("/login-status")
 public class LoginStatusServlet extends HttpServlet {
