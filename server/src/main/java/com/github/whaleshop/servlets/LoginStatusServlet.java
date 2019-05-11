@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.logging.Logger;
 import com.github.whaleshop.proto.LoginStatus;
+import com.google.protobuf.util.JsonFormat;
 
 @WebServlet("/login-status")
 public class LoginStatusServlet extends HttpServlet {
@@ -32,6 +33,7 @@ public class LoginStatusServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     log.info("doGet()");
     LoginStatus status = LoginStatus.newBuilder().setIsLoggedIn(true).build();
-    response.getOutputStream().write(status.toByteArray());
+    response.setContentType("application/json");
+    response.getWriter().println(JsonFormat.printer().print(status));
   }
 }
