@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 
-import './index.css';
-import Root from './components/container/Root';
-import rootReducer from './reducers/root';
-import * as serviceWorker from './serviceWorker';
+import 'index.css';
+import Root from 'components/container/Root.js';
+import rootReducer from 'reducers/root.js';
+import * as serviceWorker from 'serviceworker.js';
 
 const store = createStore(rootReducer);
 

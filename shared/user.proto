@@ -11,7 +11,8 @@ message User {
 }
 
 // The user's login status.
-// Next id: 2
+// Next id: 3
 message LoginStatus {
   bool is_logged_in = 1;
+  string email = 2;
 }

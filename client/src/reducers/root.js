@@ -4,10 +4,9 @@
 
 import { combineReducers } from 'redux';
 
-import contributors from './contributors';
-import user from './user';
+import { contributorsReducer as contributors } from 'reducers/contributors.js';
+import { userReducer as user } from 'reducers/user.js';
 
-// TODO(brianch): Figure out how to make redux work with proto3. Json format
-// is too unstructured.
-
+// Note: combineReducers will call each reducer 3 times at the start to probe
+// for errors. See https://github.com/reduxjs/redux/issues/729.
 export default combineReducers({ contributors, user });

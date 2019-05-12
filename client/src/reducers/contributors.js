@@ -1,43 +1,39 @@
 /**
- * This file holds reducers for the contributors to this project.
+ * @file This file holds reducers for the contributors to this project.
  */
 
-/** The initial state of the reducer. */
-const initState = {
-  contributor1: {
-    id: 'contributor1',
-    name: 'Brian Chen ( Advisor)',
-    description: 'Hello! I am Brian'
-  },
-  contributor2: {
-    id: 'contributor2',
-    name: 'Insert name here.',
-    description: 'Insert description here.'
-  },
-  contributor3: {
-    id: 'contributor3',
-    name: 'Insert name here.',
-    description: 'Insert description here.'
-  },
-  contributor4: {
-    id: 'contributor4',
-    name: 'Insert name here.',
-    description: 'Insert description here.'
-  },
-  contributor5: {
-    id: 'contributor5',
-    name: 'Insert name here.',
-    description: 'Insert description here.'
-  },
-  keys: [
-    'contributor1',
-    'contributor2',
-    'contributor3',
-    'contributor4',
-    'contributor5'
-  ]
+/** A contributor to this project. */
+class Contributor {
+  constructor(name, description) {
+    /** The display name of the contributor. */
+    this.name = name;
+
+    /** A description of the contributor. */
+    this.description = description;
+  }
+
+  toJson() {
+    const { name, description } = this;
+    return { name, description };
+  }
+}
+
+/** Map of all contributors. */
+const contributors = {
+  1: new Contributor('Brian Chen (Project Advisor)', 'Hi I am Brian').toJson(),
+  2: new Contributor('Name1', 'Description').toJson(),
+  3: new Contributor('Name2', 'Description').toJson(),
+  4: new Contributor('Name3', 'Description').toJson(),
+  5: new Contributor('Name4', 'Description').toJson(),
+  keys: [1, 2, 3, 4, 5]
 };
 
-export default function(state = initState, action) {
+const contributorsReducer = (state = contributors, action) => {
   return state;
-}
+};
+
+/** Classes and Constants */
+export { Contributor };
+
+/** Reducers */
+export { contributorsReducer };

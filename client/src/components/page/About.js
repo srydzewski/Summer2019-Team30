@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import TeamIntroCard from '../ui/TeamIntroCard';
+import TeamIntroCard from 'components/ui/TeamIntroCard.js';
 
 /**
- * @param contributor A single contributor that exists in the root redux store.
- * @param contributor.id The unique id of the contributor.
- * @param contributor.name The name of the contributor.
- * @param contributor.description A description of the contributor.
+ * @param {!Contributor} contributor A single contributor that exists in the root redux store.
+ * @param id A unique id for the contributor.
  * @return The html representation of a contributor's introduction.
  */
-const createMemberUi = function(contributor) {
+const createContributorUi = (contributor, id) => {
   return (
     <TeamIntroCard
-      key={contributor.id}
+      key={id}
       name={contributor.name}
       description={contributor.description}
     />
@@ -26,14 +24,14 @@ class About extends Component {
     const { contributors } = this.props;
 
     // Loops through each project contributor and creates a ui card.
-    const contributorsListUi = contributors.keys.map(id =>
-      createMemberUi(contributors[id])
+    const contributorsUi = contributors.keys.map(id =>
+      createContributorUi(contributors[id], id)
     );
 
     return (
       <div className='container'>
         <h1 className='center'>About Our Team</h1>
-        {contributorsListUi}
+        {contributorsUi}
       </div>
     );
   }
