@@ -38,9 +38,12 @@ class NavBar extends Component {
             isLoggedIn: status.isLoggedIn,
             email: status.email
           });
+        } else {
+          console.log('Error: Server is unavailable.');
         }
       });
 
+  /** Renders a login or logout button depending on the user's login status. */
   renderLoginLogoutUi = () => {
     const { isFetching, isLoggedIn, email } = this.state;
     return !isFetching && isLoggedIn && email ? (
