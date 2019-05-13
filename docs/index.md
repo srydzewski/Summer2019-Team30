@@ -1,5 +1,13 @@
-# Welcome to the Summer2019-Team30 wiki!
+# Google CodeU Summer 2019 Team 30
 
-## Where to Start
+Welcome to the Team 30's documentation website.
 
-1. [New Developer Guide](https://github.com/fluffysheep-codeu/Summer2019-Team30/wiki/New-Developer-Guide)
+## Guides
+
+1. [Setup & Learning Guide](https://fluffysheep-codeu.github.io/Summer2019-Team30/new-developer-guide)
+
+2. [Style Guide](https://fluffysheep-codeu.github.io/Summer2019-Team30/style-guide)
+
+3. [Development Guide](https://fluffysheep-codeu.github.io/Summer2019-Team30/development-guide)
+
+4. [Git Guide](https://fluffysheep-codeu.github.io/Summer2019-Team30/development-guide)
