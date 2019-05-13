@@ -1,57 +1,41 @@
 # Team 30
 
-If you are new to this repo, please read the [New Developer Guide](docs/index.md) as it will standardize your
-working knowledge and development environment with everyone else working on this repo.
+Please read the [documentation](https://fluffysheep-codeu.github.io/Summer2019-Team30/) for details and setup for this project.
 
-## Setup (For Non CodeU Students)
+## Running the Client-Server Locally
 
-If you are a CodeU student and have already setup your environment, you can skip
-this section.
+1. Open a terminal window and navigate to the repository root.
+2. Run these commands to start the Appengine Devserver.
+   ```
+   cd server
+   mvn appengine:devserver
+   ```
+3. Open a _NEW_ terminal window and navigate to the repository root.
+4. Run these commands to start the React client.
 
-1. [Install npm](https://www.npmjs.com/get-npm). This is a package manager
-   we use to install react and node on our machines.
+   ```
+   cd client
+   npm start
+   ```
 
-2. [Install maven](https://maven.apache.org/install.html). This is what we use
-   to compile the server.
+5. If a web page didn't open up, navigate to http://localhost:3000.
 
-3. [Install JDK 1.8.202+](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html). This is used to compile the java.
+## Making Changes
 
-4. [Install Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git). This is used to grab the code repository into your computer. If you are using Mac or Linux you might
-   not need to install git. I would first try to run step 5's command first.
+1. Any changes to javascript files under client/src will be hot reloaded. This means changing UI elements through javascript will automatically appear on your local web page.
 
-5. Clone the repo using `git clone https://github.com/fluffysheep-codeu/Summer2019-Team30.git` in the command line. If you are using windows, then you might consider installing [Git bash](https://gitforwindows.org/) which allows you to run a Unix terminal.
+2. Any changes to java files must be recompiled by maven. This means you must re-run `mvn appengine:devserver` from the server folder. You _DO NOT_ need to rerun the client.
 
-## Client Local Development
+3. Client and server can be run and stopped independently so you usually don't need to kill both processes during development. You will need 2 terminals open for typical development.
 
-1. Run the commands below in a terminal to start a react server.
+## Typical Development Cycle
 
-```
-cd client
-npm start
-```
-
-2. Navigate to http://localhost:3000 to view the client.
-
-3. Make code changes to files under client/src
-
-4. Refresh the page to see your changes. Hot reload (reloading using ctrl + r or cmd + r) is enabled.
-
-## Server Local Development
-
-1. Run the commands below to start an appengine server.
-
-```
-# Start from repo's top level directory.
-cd client
-
-# Builds a production build of the client code.
-npm run build
-cd ../server
-
-# Copies the client code into a development server.
-mvn appengine:devserver
-```
-
-2. Navigate to http://localhost:8080 which will show the client hooked up to a server.
-
-3. Note hot reload is not enabled on server development since Java is a compile-time language.
+1. Start the React client.
+2. Start the Appengine Devserver.
+3. Open http://localhost:3000.
+4. Make changes to javascript files (client work)
+5. Check http://localhost:3000 to see if changes worked.
+6. Commit and push changes that aren't broken.
+7. Make changes to java files (server work).
+8. Re-compile the server.
+9. Check http://localhost:3000 to see if the server changes worked.

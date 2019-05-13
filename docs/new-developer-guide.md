@@ -9,16 +9,29 @@ If you are not a CodeU student, you can skip this section because it won't make 
 You will need to be logged into your CodeU account to perform these steups.
 
 1. Do the [Environment Setup](https://sites.google.com/codeustudents.com/summer2019/week0-codeu-project-setup/environment-setup)
+
 2. Do not do [Github Repo Setup](https://sites.google.com/codeustudents.com/summer2019/week0-codeu-project-setup/github-repo-setup) and [App Engine Setup](https://sites.google.com/codeustudents.com/summer2019/week0-codeu-project-setup/app-engine-setup) since those tasks will be pre-setup for you.
+
 3. [Optional] Do [Setup Confirmation](https://sites.google.com/codeustudents.com/summer2019/week0-codeu-project-setup/setup-confirmation-index-html). Instead of running `mvn appengine:devserver`, follow the commands on our [README.md](https://github.com/fluffysheep-codeu/Summer2019-Team30/blob/master/README.md). Our project uses slightly different technologies than the main project.
 
 ## Environment Setup for Non CodeU Students
 
-If you are not a CodeU student and happen to stumble upon this repository then you should be able to read the [README.md](https://github.com/fluffysheep-codeu/Summer2019-Team30/blob/master/README.md) to setup your environment.
+If you are not a CodeU student and happen to stumble upon this repository then here are your instructions.
+
+1. [Install npm](https://www.npmjs.com/get-npm). This is a package manager we use to install react and node on our machines.
+
+2. [Install maven](https://maven.apache.org/install.html). This is what we use to compile the server.
+
+3. [Install JDK 1.8.202+](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html). This is used to compile the java.
+
+4. [Install Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git). This is used to grab the code repository into your computer. If you are using Mac or Linux you might not need to install git. I would first try to run step 5's command first.
+
+5. Clone the repo using `git clone https://github.com/fluffysheep-codeu/Summer2019-Team30.git` in the command line. If you are using windows, then you might consider installing [Git bash](https://gitforwindows.org/) which allows you to run a Unix terminal.
 
 ## Editor Setup
 
 1. Our editor of choice is [Visual Studio Code](https://code.visualstudio.com/) because of the really nice extensions for React.
+
 2. Please install these extensions in VS Code:
 
    - "Prettier - Code formatter" by Esben Petersen.
@@ -55,6 +68,10 @@ If you are not a CodeU student and happen to stumble upon this repository then y
    "editor.rulers": [80]
    ```
 
+## Running the Code
+
+Refer to the instructions at [README.md](https://github.com/fluffysheep-codeu/Summer2019-Team30/blob/master/README.md).
+
 ## Learning the Client
 
 The client uses React, Redux, and Protobuffs (aka Protos). You will use Javascript, HTML, CSS. Don't worry if you don't know anything about them now, we will use Youtube to learn.
@@ -64,7 +81,9 @@ Watch [React + Redux Tutorial on Youtube by The Net Ninja](https://www.youtube.c
 Important Takeaways from the videos:
 
 1. [Video #6](https://www.youtube.com/watch?v=-XQ2zCdxw0I&list=PL4cUxeGkcC9ij8CfkAY2RAGb-tmkNwQHG&index=6) pay special attention to how you debug web applications. You can debug them directly through chrome because chrome has a debugger! React Dev Tools allows you to see the state of each react element on the page.
+
 2. [Video #10](https://www.youtube.com/watch?v=5QwNCX3UbXc&list=PL4cUxeGkcC9ij8CfkAY2RAGb-tmkNwQHG&index=11&t=0s) demonstrates how to run a terminal in VS Code. This is super useful so you don't have a bunch of terminals open.
+
 3. [Video #34](https://www.youtube.com/watch?v=HKU24nY8Hsc&list=PL4cUxeGkcC9ij8CfkAY2RAGb-tmkNwQHG&index=35&t=0s) is the start of Redux.
 
 ## Learning the Server
