@@ -8,13 +8,11 @@ import React from 'react';
  * @param props.description A description about the team member.
  * @return The html representation of the TeamIntroCard.
  */
-const TeamIntroCard = props => {
-  return (
-    <div className='TeamIntroCard'>
-      <h2>{props.name}</h2>
-      <p>{props.description}</p>
-    </div>
-  );
-};
+const TeamIntroCard = props => (
+  <div className='TeamIntroCard'>
+    <h2>{props.name}</h2>
+    <p>{props.description}</p>
+  </div>
+);
 
 export default TeamIntroCard;

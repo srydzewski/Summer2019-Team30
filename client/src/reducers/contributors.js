@@ -1,7 +1,3 @@
-/**
- * @file This file holds reducers for the contributors to this project.
- */
-
 /** A contributor to this project. */
 class Contributor {
   constructor(name, description) {
@@ -12,14 +8,15 @@ class Contributor {
     this.description = description;
   }
 
-  toJson() {
+  /** Prints the object in json format. */
+  toJson = () => {
     const { name, description } = this;
     return { name, description };
-  }
+  };
 }
 
 /** Map of all contributors. */
-const contributors = {
+const initialContributorsState = {
   1: new Contributor('Brian Chen (Project Advisor)', 'Hi I am Brian').toJson(),
   2: new Contributor('Name1', 'Description').toJson(),
   3: new Contributor('Name2', 'Description').toJson(),
@@ -28,12 +25,11 @@ const contributors = {
   keys: [1, 2, 3, 4, 5]
 };
 
-const contributorsReducer = (state = contributors, action) => {
-  return state;
-};
+/**
+ * A reducer that handles actions on the state of the contributor.
+ * @param state The state of contributors.
+ */
+const contributorsReducer = (state = initialContributorsState) => state;
 
-/** Classes and Constants */
-export { Contributor };
-
-/** Reducers */
 export { contributorsReducer };
+export default Contributor;

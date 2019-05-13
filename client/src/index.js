@@ -8,6 +8,7 @@ import Root from 'components/container/Root.js';
 import rootReducer from 'reducers/root.js';
 import * as serviceWorker from 'serviceworker.js';
 
+/** Redux storage of all client-side data. */
 const store = createStore(rootReducer);
 
 ReactDOM.render(

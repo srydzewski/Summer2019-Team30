@@ -17,8 +17,6 @@ class NavBar extends Component {
       email: null
     };
   }
-
-  /** React lifecycle. */
   componentDidMount = () => {
     this.setState({ ...this.state, isFetching: true });
     this.fetchLoginStatus();
@@ -54,28 +52,25 @@ class NavBar extends Component {
     );
   };
 
-  /** React lifecycle. */
-  render = () => {
-    return (
-      <div className='Navbar'>
-        <nav>
-          <ul>
-            <li>
-              <NavLink exact to={HOME}>
-                Home
-              </NavLink>
-            </li>
-            <li>
-              <NavLink exact to={ABOUT}>
-                About Our Team
-              </NavLink>
-            </li>
-            <li>{this.renderLoginLogoutUi()}</li>
-          </ul>
-        </nav>
-      </div>
-    );
-  };
+  render = () => (
+    <div className='Navbar'>
+      <nav>
+        <ul>
+          <li>
+            <NavLink exact to={HOME}>
+              Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink exact to={ABOUT}>
+              About Our Team
+            </NavLink>
+          </li>
+          <li>{this.renderLoginLogoutUi()}</li>
+        </ul>
+      </nav>
+    </div>
+  );
 }
 
 export default NavBar;

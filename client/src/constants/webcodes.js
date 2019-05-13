@@ -1,5 +1,5 @@
 /**
- * @file Exports web code constants.
+ * @fileoverview Exports web code constants.
  */
 
 /** https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200 */
