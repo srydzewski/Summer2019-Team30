@@ -2,8 +2,6 @@
 
 This guide is specific to Summer 2019 Team 30 as it uses a combination of technologies such as React, Redux, Protobuffs, Json, Maven + Google App Engine. The technologies we use are specific to modern day web development. Many of these tools have been developed to make web development significantly easier than using vanilla javascript. While we sacrifice setup and learning time to understand how to use each of these frameworks, the ultimate goal is to make our future development time significantly faster.
 
-This project is split between server and client. Server refers to any code residing in the `//server folder` and client refers to any code residing in the `//client folder`. The `//` refers to the root folder which holds our repository aka `Summer2019-Team30`.
-
 ## Environment Setup for CodeU Students
 
 If you are not a CodeU student, you can skip this section because it won't make sense.
@@ -20,20 +18,42 @@ If you are not a CodeU student and happen to stumble upon this repository then y
 
 ## Editor Setup
 
-1. Our editor of choice is [VS Code](https://code.visualstudio.com/) because of the really nice extensions for react.
+1. Our editor of choice is [Visual Studio Code](https://code.visualstudio.com/) because of the really nice extensions for React.
 2. Please install these extensions in VS Code:
 
-- `"Prettier - Code formatter"` by Esben Petersen.
-- `"ES7 React/Redux/GraphQL/React-Native snippets"` by dsznajder
-- `"Sublime Babel"` by Josh Peng
-- [OPTIONAL] `"Monokai++"` by Davide Casella. This is just an editor theme to change the colors of VS Code.
+   - "Prettier - Code formatter" by Esben Petersen.
+   - "ES7 React/Redux/GraphQL/React-Native snippets" by dsznajder
+   - "Sublime Babel" by Josh Peng
+   - [OPTIONAL] "Monokai++" by Davide Casella
 
 3. Refer to the [README.md](https://github.com/fluffysheep-codeu/Summer2019-Team30/blob/master/README.md) for cloning the repo. "Cloning the repo/repository" means to get the code from Github on to your computer.
 
-4. Add the root folder of the cloned repo to VS Code. `File -> Add Folder To Workspace -> Summer2019-Team30`.
-5. Save the VS Project. `File -> Save Workspace As`. Navigate to the root directory `Summer2019-Team30` and add a new folder named `local`. It must be named `local` because our `.gitignore` will prevent the `local` folder from being pushed to our shared repository on Github. Save your workspace in the `local` folder. My workspace is just called `project.code-workspace`.
-6. Turn format save on in VS Code. `Gear icon in the bottom left corner -> Settings -> Type "Format on Save" in the searchbar -> Click checkbox next to "Format on Save"`.
-7. Turn on 80 character line vertical ruler. `Settings gear bottom left -> Settings -> Search "Editor: Rulers" -> Edit in settings.json -> Add "editor.rulers": [80] at the end`.
+4. Add the root folder of the cloned repo to VS Code.
+
+   ```
+   File -> Add Folder To Workspace -> Summer2019-Team30
+   ```
+
+5. Save the VS Project to the local directory. You may have to create a local directory.
+
+   ```
+   File -> Save Workspace As -> Summer2019-Team30/local/project.code-workspace
+   ```
+
+6. Turn format save on in VS Code.
+
+   ```
+   Settings -> Search "Format on Save" -> Check "Format on Save"
+   ```
+
+7. Turn on 80 character line vertical ruler.
+
+   ```
+   Settings -> Search "Editor: Rulers" -> Edit in settings.json
+
+   // In settings.json add:
+   "editor.rulers": [80]
+   ```
 
 ## Learning the Client
 
