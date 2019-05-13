@@ -5,7 +5,7 @@ import { SERVER_OK } from 'constants/webcodes.js';
 import { ABOUT, HOME, LOGIN, LOGIN_STATUS, LOGOUT } from 'constants/links.js';
 
 /** The common navbar ui used throughout the application. */
-class NavBar extends Component {
+class CustomNavBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -73,4 +73,4 @@ class NavBar extends Component {
   );
 }
 
-export default NavBar;
+export default CustomNavBar;
