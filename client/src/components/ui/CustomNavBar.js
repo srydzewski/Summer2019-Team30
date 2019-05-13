@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { SERVER_OK } from 'constants/webcodes.js';
+import { SERVER_OK } from 'constants/webCodes.js';
 import { ABOUT, HOME, LOGIN, LOGIN_STATUS, LOGOUT } from 'constants/links.js';
 
 /** The common navbar ui used throughout the application. */

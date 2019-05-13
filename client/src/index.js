@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import 'index.css';
 import Root from 'components/container/Root.js';
 import rootReducer from 'reducers/root.js';
-import * as serviceWorker from 'serviceworker.js';
+import * as serviceWorker from 'serviceWorker.js';
 
 /** Redux storage of all client-side data. */
 const store = createStore(rootReducer);
