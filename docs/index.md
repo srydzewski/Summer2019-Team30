@@ -4,10 +4,10 @@ Welcome to the Team 30's documentation website.
 
 ## Guides
 
-1. [Setup & Learning Guide](https://fluffysheep-codeu.github.io/Summer2019-Team30/new-developer-guide)
+1. [Setup & Learning Guide](new-developer-guide.md)
 
-2. [Style Guide](https://fluffysheep-codeu.github.io/Summer2019-Team30/style-guide)
+2. [Style Guide](style-guide.md)
 
-3. [Development Guide](https://fluffysheep-codeu.github.io/Summer2019-Team30/development-guide)
+3. [Development Guide](development-guide.md)
 
-4. [Git Guide](https://fluffysheep-codeu.github.io/Summer2019-Team30/development-guide)
+4. [Git Guide](development-guide.md)
