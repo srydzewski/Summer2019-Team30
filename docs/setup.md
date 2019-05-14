@@ -12,7 +12,9 @@ You will need to be logged into your CodeU account to perform these steups.
 
 2. Do not do [Github Repo Setup](https://sites.google.com/codeustudents.com/summer-2019/week0-codeu-project-setup/github-repo-setup) and [App Engine Setup](https://sites.google.com/codeustudents.com/summer-2019/week0-codeu-project-setup/app-engine-setup) since those tasks will be pre-setup for you.
 
-3. [Optional] Do [Setup Confirmation](https://sites.google.com/codeustudents.com/summer-2019/week0-codeu-project-setup/setup-confirmation-index-html) BUT for steps 1 & 2, follow the instructions on our [README.md](https://github.com/fluffysheep-codeu/Summer2019-Team30/blob/master/README.md). Our project uses a slightly different framework than the main project.
+3. Do [Setup Confirmation](https://sites.google.com/codeustudents.com/summer-2019/week0-codeu-project-setup/setup-confirmation-index-html) BUT for steps 1 & 2, follow the instructions on our [README.md](https://github.com/fluffysheep-codeu/Summer2019-Team30/blob/master/README.md). Our project uses a slightly different framework than the main project.
+
+4. Skim through the entire website starting from the [CodeU toolbox](https://sites.google.com/codeustudents.com/summer-2019/codeu-toolbox). Skimming the website will give you a better understanding of what to expect in the next 10 weeks as well as what technical tools, resources, and guides are available to you.
 
 ## Environment Setup for Non CodeU Students
 
@@ -92,4 +94,4 @@ The server is compiled using maven and deployed to Google App Engine. This proje
 
 Google App Engine provides several layers of APIs and services that allows this project to scale. Please [watch this videp](https://youtu.be/ytT2-kL9v2o) to get a better understanding of what some of the APIs and services at our disposal. At a minimum, we will be using Datastore to store all data and Servlets to handle the requests from the client.
 
-[Next read the Project Overview](project-overview.md)
+[Next read the Project Overview](overview.md)
