@@ -2,6 +2,12 @@
 
 Please read the [documentation](https://fluffysheep-codeu.github.io/Summer2019-Team30/) for details and setup for this project.
 
+## Cloning the Repo
+1. Open a terminal and navigate to where you want to put this repository.
+2. Run `git clone https://github.com/fluffysheep-codeu/Summer2019-Team30.git`
+3. This will put you on the master branch.
+4. Follow the [Using Git Guide](https://sites.google.com/corp/codeustudents.com/summer-2019/reference-guides/using-git) to learn about branching and pull requests so that you can make your first changes to this codebase.
+
 ## Running the Client-Server Locally
 
 1. Open a terminal window and navigate to the repository root.
