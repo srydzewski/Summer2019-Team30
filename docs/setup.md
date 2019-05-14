@@ -8,11 +8,11 @@ If you are not a CodeU student, you can skip this section because it won't make 
 
 You will need to be logged into your CodeU account to perform these steups.
 
-1. Do the [Environment Setup](https://sites.google.com/codeustudents.com/summer2019/week0-codeu-project-setup/environment-setup)
+1. Do the [Environment Setup](https://sites.google.com/codeustudents.com/summer-2019/week0-codeu-project-setup/environment-setup)
 
-2. Do not do [Github Repo Setup](https://sites.google.com/codeustudents.com/summer2019/week0-codeu-project-setup/github-repo-setup) and [App Engine Setup](https://sites.google.com/codeustudents.com/summer2019/week0-codeu-project-setup/app-engine-setup) since those tasks will be pre-setup for you.
+2. Do not do [Github Repo Setup](https://sites.google.com/codeustudents.com/summer-2019/week0-codeu-project-setup/github-repo-setup) and [App Engine Setup](https://sites.google.com/codeustudents.com/summer-2019/week0-codeu-project-setup/app-engine-setup) since those tasks will be pre-setup for you.
 
-3. [Optional] Do [Setup Confirmation](https://sites.google.com/codeustudents.com/summer2019/week0-codeu-project-setup/setup-confirmation-index-html). Instead of running `mvn appengine:devserver`, follow the commands on our [README.md](https://github.com/fluffysheep-codeu/Summer2019-Team30/blob/master/README.md). Our project uses slightly different technologies than the main project.
+3. [Optional] Do [Setup Confirmation](https://sites.google.com/codeustudents.com/summer-2019/week0-codeu-project-setup/setup-confirmation-index-html) BUT for steps 1 & 2, follow the instructions on our [README.md](https://github.com/fluffysheep-codeu/Summer2019-Team30/blob/master/README.md). Our project uses a slightly different framework than the main project.
 
 ## Environment Setup for Non CodeU Students
 
