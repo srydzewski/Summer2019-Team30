@@ -1,6 +1,6 @@
 # Documentation Home Page
 
-Welcome to the Team 30's documentation website. If you are new to this repo, please read the [New Developer Guide](new-developer-guide.md) first.
+Welcome to the Team 30's documentation website. If you are new to this repo, start from the [Setup Guide](setup.md).
 
 ## Starting the Client
 
