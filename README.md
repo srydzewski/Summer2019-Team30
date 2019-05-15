@@ -19,6 +19,16 @@ Please read the [documentation](https://fluffysheep-codeu.github.io/Summer2019-T
 3. Open a _NEW_ terminal window and navigate to the repository root.
 4. Run these commands to start the React client.
 
+   If this is your first time running the repo after cloning then run :
+   
+   ```
+   cd client
+   npm install
+   npm start
+   ```
+
+   Otherwise you can usually run:
+   
    ```
    cd client
    npm start
