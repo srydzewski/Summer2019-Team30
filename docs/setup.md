@@ -10,11 +10,11 @@ You will need to be logged into your CodeU account to perform these steups.
 
 1. Do the [Environment Setup](https://sites.google.com/codeustudents.com/summer-2019/week0-codeu-project-setup/environment-setup)
 
-1a. [Install npm](https://www.npmjs.com/get-npm). This is a package manager we use to install react and node on our machines.
+   1a. [Install npm](https://www.npmjs.com/get-npm). This is a package manager we use to install react and node on our machines.
 
 2. Do not do [Github Repo Setup](https://sites.google.com/codeustudents.com/summer-2019/week0-codeu-project-setup/github-repo-setup) and [App Engine Setup](https://sites.google.com/codeustudents.com/summer-2019/week0-codeu-project-setup/app-engine-setup) since those tasks will be pre-setup for you.
 
-2a. Clone the repo using `git clone https://github.com/fluffysheep-codeu/Summer2019-Team30.git` in the command line. If you are using windows, then you might consider installing [Git bash](https://gitforwindows.org/) which allows you to run a Unix terminal.
+   2a. Clone the repo using `git clone https://github.com/fluffysheep-codeu/Summer2019-Team30.git` in the command line. If you are using windows, then you might consider installing [Git bash](https://gitforwindows.org/) which allows you to run a Unix terminal.
 
 3. Do [Setup Confirmation](https://sites.google.com/codeustudents.com/summer-2019/week0-codeu-project-setup/setup-confirmation-index-html) BUT for steps 1 & 2, follow the instructions on our [README.md](https://github.com/fluffysheep-codeu/Summer2019-Team30/blob/master/README.md). Our project uses a slightly different framework than the main project.
 
