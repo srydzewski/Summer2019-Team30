@@ -10,25 +10,15 @@ You will need to be logged into your CodeU account to perform these steups.
 
 1. Do the [Environment Setup](https://sites.google.com/codeustudents.com/summer-2019/week0-codeu-project-setup/environment-setup)
 
+1a. [Install npm](https://www.npmjs.com/get-npm). This is a package manager we use to install react and node on our machines.
+
 2. Do not do [Github Repo Setup](https://sites.google.com/codeustudents.com/summer-2019/week0-codeu-project-setup/github-repo-setup) and [App Engine Setup](https://sites.google.com/codeustudents.com/summer-2019/week0-codeu-project-setup/app-engine-setup) since those tasks will be pre-setup for you.
+
+2a. Clone the repo using `git clone https://github.com/fluffysheep-codeu/Summer2019-Team30.git` in the command line. If you are using windows, then you might consider installing [Git bash](https://gitforwindows.org/) which allows you to run a Unix terminal.
 
 3. Do [Setup Confirmation](https://sites.google.com/codeustudents.com/summer-2019/week0-codeu-project-setup/setup-confirmation-index-html) BUT for steps 1 & 2, follow the instructions on our [README.md](https://github.com/fluffysheep-codeu/Summer2019-Team30/blob/master/README.md). Our project uses a slightly different framework than the main project.
 
 4. Skim through the entire website starting from the [CodeU toolbox](https://sites.google.com/codeustudents.com/summer-2019/codeu-toolbox). Skimming the website will give you a better understanding of what to expect in the next 10 weeks as well as what technical tools, resources, and guides are available to you.
-
-## Environment Setup for Non CodeU Students
-
-If you are not a CodeU student and happen to stumble upon this repository then here are your instructions.
-
-1. [Install npm](https://www.npmjs.com/get-npm). This is a package manager we use to install react and node on our machines.
-
-2. [Install maven](https://maven.apache.org/install.html). This is what we use to compile the server.
-
-3. [Install JDK 1.8.202+](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html). This is used to compile the java.
-
-4. [Install Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git). This is used to grab the code repository into your computer. If you are using Mac or Linux you might not need to install git. I would first try to run step 5's command first.
-
-5. Clone the repo using `git clone https://github.com/fluffysheep-codeu/Summer2019-Team30.git` in the command line. If you are using windows, then you might consider installing [Git bash](https://gitforwindows.org/) which allows you to run a Unix terminal.
 
 ## Editor Setup
 
