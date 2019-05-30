@@ -26,7 +26,9 @@ import {
   LOGIN,
   LOGIN_STATUS,
   LOGOUT,
-  USER_PAGE
+  USER_PAGE,
+  STATS,
+  ABOUT_ME
 } from 'constants/links.js';
 import { HIDDEN } from 'constants/css.js';
 import { UserDataAction, storeUserData } from 'reducers/userData.js';
@@ -68,6 +70,13 @@ class CustomNavBar extends Component {
             <li>
               <NavLink to={ABOUT_US}>About our Team</NavLink>
             </li>
+            <li>
+              <NavLink to={STATS}>Stats</NavLink>
+            </li>
+            <li>
+              <NavLink to={ABOUT_ME}>About</NavLink>
+            </li>
+
             <li className={hideIfSignedOut}>
               <NavLink to={USER_PAGE + '?user=' + userEmail}>Your Page</NavLink>
             </li>
