@@ -18,6 +18,7 @@ import React, { Component } from 'react';
 import { MESSAGE_FEED_SERVLET, TRANSLATION_SERVLET } from 'constants/links.js';
 import Message from 'components/ui/Message.js';
 import { HIDDEN } from 'constants/css.js';
+import TranslateButton from 'components/ui/TranslateButton.js';
 
 const buildMessages = function(content) {
   return (
@@ -47,7 +48,7 @@ class PublicFeed extends Component {
       });
   }
 
-  /** Translates the text of an individual message and updates state */
+  /** Translates the text of an individual message and updates state 
   buildTranslatedMessages(content, index, languageCode) {
     const url =
       TRANSLATION_SERVLET +
@@ -67,7 +68,7 @@ class PublicFeed extends Component {
       });
   }
 
-  /** Called by clicking the button and translates all the messages and updates state */
+  /** Called by clicking the button and translates all the messages and updates state 
   requestTranslation(languageCode) {
     const messages = this.state.content;
     const translatedMessages = messages
@@ -77,6 +78,15 @@ class PublicFeed extends Component {
       : null;
     this.setState({ translatedMessages });
   }
+  */
+
+  updateMessagesWithTranslation(translatedContent) {
+    this.setState({ translatedContent });
+  }
+
+  getMessages() {
+    return this.state.content;
+  }
 
   render() {
     const value = this.state.content;
@@ -84,6 +94,10 @@ class PublicFeed extends Component {
       ? value.map(content => buildMessages(content))
       : null;
     const hideIfFullyLoaded = !messageList ? null : HIDDEN;
+    const langCode =
+      document.getElementById('language') == null
+        ? 'en'
+        : document.getElementById('language').value;
     return (
       <div id='content'>
         <h1>Message Feed</h1>
@@ -98,14 +112,14 @@ class PublicFeed extends Component {
           <option value='hi'>Hindi</option>
           <option value='ar'>Arabic</option>
         </select>
-        <button
-          onClick={e =>
-            this.requestTranslation(
-              document.getElementById('language', e).value
-            )
+        <TranslateButton
+          languageCode={langCode}
+          textList={this.getMessages()}
+          onDone={translatedContent =>
+            this.updateMessagesWithTranslation(translatedContent)
           }>
           Translate
-        </button>
+        </TranslateButton>
       </div>
     );
   }
