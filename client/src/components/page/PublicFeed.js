@@ -113,13 +113,12 @@ class PublicFeed extends Component {
           <option value='ar'>Arabic</option>
         </select>
         <TranslateButton
-          languageCode={langCode}
+          //onClick={() => document.getElementById('language').value}
           textList={this.getMessages()}
           onDone={translatedContent =>
             this.updateMessagesWithTranslation(translatedContent)
-          }>
-          Translate
-        </TranslateButton>
+          }
+        />
       </div>
     );
   }

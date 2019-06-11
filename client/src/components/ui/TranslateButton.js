@@ -13,7 +13,11 @@ class TranslateButton extends Component {
   };
 
   componentDidMount() {
-    this.requestTranslation();
+    this.returnMessages();
+  }
+
+  returnMessages() {
+    this.setState({ messages: this.props.textList });
   }
 
   buildTranslatedMessages(content, index, languageCode) {
@@ -29,32 +33,40 @@ class TranslateButton extends Component {
       .then(response => response.text())
       .then(translatedMessage => {
         content.text = translatedMessage;
+        console.log(translatedMessage);
+        console.log(this.state.messages);
         const new_messages = this.state.messages;
         new_messages[index] = content;
         this.setState({ messages: new_messages });
       });
   }
   /** Called by clicking the button and translates all the messages and updates state */
-  requestTranslation() {
+  requestTranslation(languageCode) {
     const messages = this.props.textList;
+    this.setState({ messages: messages });
     const translatedMessages = messages
       ? messages.map((content, index) =>
-          this.buildTranslatedMessages(content, index, this.props.languageCode)
+          this.buildTranslatedMessages(content, index, languageCode)
         )
       : null;
     this.setState({ translatedMessages });
   }
 
   render() {
-    return this.state.messages, <button> Translate</button>;
+    return (
+      <button
+        onClick={e =>
+          this.requestTranslation(document.getElementById('language').value)
+        }>
+        Translate
+      </button>
+    );
   }
 }
 
 TranslateButton.propTypes = {
   /** Function to get all the messages to translate. */
-  textList: PropTypes.object,
-  /** language code */
-  languageCode: PropTypes.string
+  textList: PropTypes.array
 };
 
 export default TranslateButton;
