@@ -37,6 +37,7 @@ class TranslateButton extends Component {
         console.log(this.state.messages);
         const new_messages = this.state.messages;
         new_messages[index] = content;
+        this.props.onDone(new_messages);
         this.setState({ messages: new_messages });
       });
   }
