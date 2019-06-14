@@ -74,19 +74,8 @@ public class MessageServlet extends HttpServlet {
     }
 
     String user = userService.getCurrentUser().getEmail();
-     //Disallows any HTML content
     String userText = Jsoup.clean(request.getParameter("text"), Whitelist.none());
 
-   
-    //Replacing Info
-    String parsedText = userText.replace("[b]", "<strong>").replace("[/b]",
-       "</strong>").replace("[i]", "<i>").replace("[/i]", "</i>");
-    //make sure generated HTML is valid and all tags are closed
-    String cleanedContent = Jsoup.clean(parsedText, Whitelist.basic().addTags("strong").addTags("i"));
-		//replacing text in textbox with cleaned content
-    userText = cleanedContent;
-
-   
     String regex = "(https?://\\S+\\.(png|jpg))";
     String replacement = "<img src=\"$1\" />";
     String textWithImagesReplaced = userText.replaceAll(regex, replacement);
@@ -97,3 +86,4 @@ public class MessageServlet extends HttpServlet {
     response.sendRedirect("/userpage?user=" + user);
   }
 }
+
