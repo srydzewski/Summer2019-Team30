@@ -86,4 +86,3 @@ public class MessageServlet extends HttpServlet {
     response.sendRedirect("/userpage?user=" + user);
   }
 }
-
