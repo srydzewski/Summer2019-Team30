@@ -47,7 +47,6 @@ public class MessageServlet extends HttpServlet {
    */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setHeader("Refresh", "0; URL=http://localhost3000/userpage?user=" + user);
     response.setContentType("application/json");
 
     String user = request.getParameter("user");
@@ -60,9 +59,8 @@ public class MessageServlet extends HttpServlet {
     List<Message> messages = datastore.getMessages(user);
     Gson gson = new Gson();
     String json = gson.toJson(messages);
-    
+
     response.getWriter().println(json);
-   
   }
 
   /** Stores a new {@link Message}. */
@@ -76,24 +74,7 @@ public class MessageServlet extends HttpServlet {
     }
 
     String user = userService.getCurrentUser().getEmail();
-<<<<<<< HEAD
     String userText = Jsoup.clean(request.getParameter("text"), Whitelist.none());
-=======
-
-    String userText = Jsoup.clean(request.getParameter("text"), Whitelist.basicWithImages());
-
-    String parsedText =
-        userText
-            .replace("[b]", "<strong>")
-            .replace("[/b]", "</strong>")
-            .replace("[i]", "<i>")
-            .replace("[/i]", "</i>");
-
-    String cleanedContent =
-        Jsoup.clean(parsedText, Whitelist.basicWithImages().addTags("strong").addTags("i"));
-
-    userText = cleanedContent;
->>>>>>> Replaced message textbox and fixed Server 500 error, works on page refresh
 
     String regex = "(https?://\\S+\\.(png|jpg))";
     String replacement = "<img src=\"$1\" />";
