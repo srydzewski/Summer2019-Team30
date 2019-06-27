@@ -23,6 +23,8 @@ import { HIDDEN } from 'constants/css.js';
 import { MESSAGE } from 'constants/links.js';
 import Message from 'components/ui/Message.js';
 import { ABOUT_ME_SERVLET } from '../../constants/links';
+import CKEditor from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 /** Gets the parameters from the url. Parameters are after the ? in the url. */
 const urlParams = new URLSearchParams(window.location.search);
@@ -34,6 +36,10 @@ const url1 = MESSAGE + '?user=' + userEmailParam;
 const url2 = ABOUT_ME_SERVLET + '?user=' + userEmailParam;
 /** Promises */
 const promises = Promise.all([fetch(url1), fetch(url2)]);
+/* User-Entered Message */
+var editorMessage = null;
+/* User-Entered About */
+var editorAbout = 'This is your about me.';
 
 /**
  * @param message A message sent from a user with a timestamp.
@@ -50,6 +56,27 @@ const createMessageUi = function(message) {
   );
 };
 
+const submitMessage = function() {
+  fetch(MESSAGE, {
+    method: 'POST',
+    headers: new Headers({
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }),
+    body: 'text=' + editorMessage
+  });
+  window.location.reload();
+};
+
+const submitAboutMe = function() {
+  fetch(ABOUT_ME_SERVLET, {
+    method: 'POST',
+    headers: new Headers({
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }),
+    body: 'text=' + editorAbout
+  });
+  window.location.reload();
+};
 /** Renders the /user-page page. */
 class UserPage extends Component {
   state = {
@@ -87,28 +114,28 @@ class UserPage extends Component {
     return (
       <div className='container' style={{ margin: 5 }}>
         <h1 className='center'>{userEmailParam}</h1>
-        <form action={MESSAGE} method='POST' className={hiddenIfViewingOther}>
-          Enter a new message:
-          <br />
-          <textarea name='text' className='message-input' />
-          <br />
-          <input type='submit' value='Submit' />
-        </form>
-
-        <form
-          action={ABOUT_ME_SERVLET}
-          method='POST'
-          className={hiddenIfViewingOther}>
-          {aboutUi}
-          <br />
-          <textarea name='text' className='message-input' />
-          <br />
-          <input type='submit' value='Submit' />
-        </form>
-
+        Enter a new message:
+        <br />
+        <CKEditor
+          editor={ClassicEditor}
+          onInit={editor => {}}
+          onChange={(event, editor) => {
+            editorMessage = editor.getData();
+          }}
+        />
+        <button onClick={submitMessage}>Submit</button>
+        <br />
+        {aboutUi}
+        <CKEditor
+          editor={ClassicEditor}
+          onInit={editor => {}}
+          onChange={(event, editor) => {
+            editorAbout = editor.getData();
+          }}
+        />
+        <button onClick={submitAboutMe}>Submit</button>
         <br className={hiddenIfViewingOther} />
         <hr />
-
         <p className={hiddenIfHasMessages}>This user has no posts yet.</p>
         {messagesUi}
       </div>
