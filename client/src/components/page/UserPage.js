@@ -25,6 +25,14 @@ import Message from 'components/ui/Message.js';
 import { ABOUT_ME_SERVLET } from '../../constants/links';
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+import Avatar from '@material-ui/core/Avatar';
+import Box from '@material-ui/core/Box';
+import { withStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import IconButton from 'components/ui/IconButton.js';
+import Icon from 'components/ui/Icon.js';
 
 /** Gets the parameters from the url. Parameters are after the ? in the url. */
 const urlParams = new URLSearchParams(window.location.search);
@@ -77,6 +85,26 @@ const submitAboutMe = function() {
   });
   window.location.reload();
 };
+const styles = function() {
+  return {
+    editButton: {
+      marginLeft: 0,
+      marginTop: 12
+    },
+    upSm: {
+      marginLeft: 20,
+      marginTop: 0
+    },
+    settings: {
+      marginLeft: 5
+    },
+    a: {
+      margin: 20,
+      width: 80,
+      height: 80
+    }
+  };
+};
 /** Renders the /user-page page. */
 class UserPage extends Component {
   state = {
@@ -97,6 +125,7 @@ class UserPage extends Component {
     const { messages, about } = this.state;
 
     const { userEmail } = this.props.userData;
+    const { classes } = this.props;
 
     // A boolean that checks whether the current logged in user is viewing
     // another user's page. Some controls such as the message form will hide if
@@ -112,9 +141,22 @@ class UserPage extends Component {
     const aboutUi = about ? about.content : null;
 
     return (
-      <div className='container' style={{ margin: 5 }}>
-        <h1 className='center'>{userEmailParam}</h1>
-        Enter a new message:
+      <div className='container' style={{ margin: 10 }}>
+        <Grid container spacing={10}>
+          <Grid item xs={2}>
+            <Avatar
+              className={classes.a}
+              style={{ margin: 'auto' }}
+              alt='My profile'
+              src='https://cc-media-foxit.fichub.com/image/fox-it-mondofox/e8c0f288-781d-4d0b-98ad-fd169782b53b/scene-sottacqua-per-i-sequel-di-avatar-maxw-654.jpg'
+            />
+          </Grid>
+          <Grid item xs={3}>
+            <h1 className='center'>{userEmailParam}</h1>
+          </Grid>
+        </Grid>
+        <br />
+        <Typography variant='h6'> Enter a new message:</Typography>
         <br />
         <CKEditor
           editor={ClassicEditor}
@@ -145,7 +187,9 @@ class UserPage extends Component {
 
 UserPage.propTypes = {
   /** A json of the user data. */
-  userData: PropTypes.object
+  userData: PropTypes.object,
+  /**required by material-ui */
+  classes: PropTypes.object.isRequired
 };
 
 /** Maps user data from redux to UserPage. */
@@ -153,4 +197,4 @@ const mapStateToProps = function(state) {
   return { userData: state.userData };
 };
 
-export default connect(mapStateToProps)(UserPage);
+export default connect(mapStateToProps)(withStyles(styles)(UserPage));
