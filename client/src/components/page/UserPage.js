@@ -183,9 +183,7 @@ class UserPage extends Component {
         <Grid container>
           <Grid item xs={2} />
           <Grid item xs={3}>
-            <Typography variant='h6' className={classes.words}>
-              {aboutUi}
-            </Typography>
+            {aboutUi}
           </Grid>
         </Grid>
         <br />
