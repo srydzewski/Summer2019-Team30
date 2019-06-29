@@ -33,6 +33,8 @@ import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import IconButton from 'components/ui/IconButton.js';
 import Icon from 'components/ui/Icon.js';
+import Paper from '@material-ui/core/Paper';
+import blue from '@material-ui/core/colors/blue';
 
 /** Gets the parameters from the url. Parameters are after the ? in the url. */
 const urlParams = new URLSearchParams(window.location.search);
@@ -87,21 +89,24 @@ const submitAboutMe = function() {
 };
 const styles = function() {
   return {
-    editButton: {
-      marginLeft: 0,
-      marginTop: 12
-    },
-    upSm: {
-      marginLeft: 20,
-      marginTop: 0
-    },
-    settings: {
-      marginLeft: 5
-    },
     a: {
-      margin: 20,
-      width: 80,
-      height: 80
+      marginLeft: 50,
+      marginTop: 10,
+      width: 100,
+      height: 100,
+      justify: 'center'
+    },
+    submit: {
+      marginTop: 10
+    },
+    words: {
+      fontSize: 18,
+      marginLeft: 8
+    },
+    header: {
+      fontSize: 35,
+      marginTop: 30,
+      fontFamily: 'PT Sans'
     }
   };
 };
@@ -146,37 +151,64 @@ class UserPage extends Component {
           <Grid item xs={2}>
             <Avatar
               className={classes.a}
-              style={{ margin: 'auto' }}
               alt='My profile'
               src='https://cc-media-foxit.fichub.com/image/fox-it-mondofox/e8c0f288-781d-4d0b-98ad-fd169782b53b/scene-sottacqua-per-i-sequel-di-avatar-maxw-654.jpg'
             />
           </Grid>
           <Grid item xs={3}>
-            <h1 className='center'>{userEmailParam}</h1>
+            <Typography className={classes.header}>{userEmailParam}</Typography>
+          </Grid>
+          <Grid
+            item
+            xs={6}
+            style={{ height: 30, marginTop: 10, marginLeft: 60 }}>
+            <div className={hiddenIfViewingOther}>
+              <CKEditor
+                editor={ClassicEditor}
+                onInit={editor => {}}
+                onChange={(event, editor) => {
+                  editorAbout = editor.getData();
+                }}
+              />
+              <Button
+                onClick={submitAboutMe}
+                className={classes.submit}
+                variant='contained'
+                color='primary'>
+                Submit
+              </Button>
+            </div>
+          </Grid>
+        </Grid>
+        <Grid container>
+          <Grid item xs={2} />
+          <Grid item xs={3}>
+            <Typography variant='h6' className={classes.words}>
+              {aboutUi}
+            </Typography>
           </Grid>
         </Grid>
         <br />
-        <Typography variant='h6'> Enter a new message:</Typography>
+        <div className={hiddenIfViewingOther}>
+          <Typography variant='h6' className={classes.words}>
+            Enter a new message:
+          </Typography>
+          <CKEditor
+            editor={ClassicEditor}
+            onInit={editor => {}}
+            onChange={(event, editor) => {
+              editorMessage = editor.getData();
+            }}
+          />
+          <Button
+            onClick={submitMessage}
+            className={classes.submit}
+            color='primary'
+            variant='contained'>
+            Submit
+          </Button>
+        </div>
         <br />
-        <CKEditor
-          editor={ClassicEditor}
-          onInit={editor => {}}
-          onChange={(event, editor) => {
-            editorMessage = editor.getData();
-          }}
-        />
-        <button onClick={submitMessage}>Submit</button>
-        <br />
-        {aboutUi}
-        <CKEditor
-          editor={ClassicEditor}
-          onInit={editor => {}}
-          onChange={(event, editor) => {
-            editorAbout = editor.getData();
-          }}
-        />
-        <button onClick={submitAboutMe}>Submit</button>
-        <br className={hiddenIfViewingOther} />
         <hr />
         <p className={hiddenIfHasMessages}>This user has no posts yet.</p>
         {messagesUi}
