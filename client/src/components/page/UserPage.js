@@ -208,7 +208,7 @@ class UserPage extends Component {
         </div>
         <br />
         <hr />
-        <p className={hiddenIfHasMessages}>This user has no posts yet.</p>
+        <div className={hiddenIfHasMessages}>This user has no posts yet.</div>
         {messagesUi}
       </div>
     );
