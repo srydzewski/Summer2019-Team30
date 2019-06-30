@@ -48,12 +48,13 @@ public class Datastore {
     datastore.put(userEntity);
   }
 
-  /** Returns the User owned by the email address, or null if no matching User was found. */
+  /**
+   * Returns the User owned by the email address, or null if no matching User was
+   * found.
+   */
   public User getUser(String email) {
 
-    Query query =
-        new Query("User")
-            .setFilter(new Query.FilterPredicate("email", FilterOperator.EQUAL, email));
+    Query query = new Query("User").setFilter(new Query.FilterPredicate("email", FilterOperator.EQUAL, email));
     PreparedQuery results = datastore.prepare(query);
     Entity userEntity = results.asSingleEntity();
     if (userEntity == null) {
@@ -79,16 +80,14 @@ public class Datastore {
   /**
    * Gets messages posted by a specific user.
    *
-   * @return a list of messages posted by the user, or empty list if user has never posted a
-   *     message. List is sorted by time descending.
+   * @return a list of messages posted by the user, or empty list if user has
+   *         never posted a message. List is sorted by time descending.
    */
   public List<Message> getMessages(String user) {
     List<Message> messages = new ArrayList<>();
 
-    Query query =
-        new Query("Message")
-            .setFilter(new Query.FilterPredicate("user", FilterOperator.EQUAL, user))
-            .addSort("timestamp", SortDirection.DESCENDING);
+    Query query = new Query("Message").setFilter(new Query.FilterPredicate("user", FilterOperator.EQUAL, user))
+        .addSort("timestamp", SortDirection.DESCENDING);
     PreparedQuery results = datastore.prepare(query);
 
     for (Entity entity : results.asIterable()) {
@@ -113,7 +112,8 @@ public class Datastore {
   /**
    * Gets messages posted by all users.
    *
-   * @return a list of messages posted by all users. List is sorted by time descending.
+   * @return a list of messages posted by all users. List is sorted by time
+   *         descending.
    */
   public List<Message> getAllMessages() {
     List<Message> messages = new ArrayList<>();

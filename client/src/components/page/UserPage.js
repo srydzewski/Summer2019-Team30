@@ -25,6 +25,7 @@ import Message from 'components/ui/Message.js';
 import { ABOUT_ME_SERVLET } from '../../constants/links';
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import Dropzone from 'react-dropzone';
 
 /** Gets the parameters from the url. Parameters are after the ? in the url. */
 const urlParams = new URLSearchParams(window.location.search);
@@ -66,7 +67,7 @@ const submitMessage = function() {
   });
   window.location.reload();
 };
-
+const uploadImage = function() {};
 const submitAboutMe = function() {
   fetch(ABOUT_ME_SERVLET, {
     method: 'POST',
@@ -138,6 +139,23 @@ class UserPage extends Component {
         <hr />
         <p className={hiddenIfHasMessages}>This user has no posts yet.</p>
         {messagesUi}
+        <form method='post' enctype='multipart/form-data'>
+          <input type='file' name='myFile' />
+          <button type='submit' value='Submit'>
+            {' '}
+            Adds image
+          </button>
+        </form>
+        <Dropzone onDrop={this.onDrop}>
+          {({ getRootProps, getInputProps, isDragActive }) => (
+            <div {...getRootProps()}>
+              <input {...getInputProps()} />
+              {isDragActive
+                ? "Drop it like it's hot!"
+                : 'Click me or drag a file to upload!'}
+            </div>
+          )}
+        </Dropzone>
       </div>
     );
   }
