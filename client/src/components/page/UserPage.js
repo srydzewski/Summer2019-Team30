@@ -111,6 +111,14 @@ class UserPage extends Component {
       : null;
 
     const aboutUi = about ? about.content : null;
+    function encodeImageFileAsURL(element) {
+      var file = element.files[0];
+      var reader = new FileReader();
+      reader.onloadend = function() {
+        console.log('RESULT', reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
 
     return (
       <div className='container' style={{ margin: 5 }}>
@@ -139,23 +147,8 @@ class UserPage extends Component {
         <hr />
         <p className={hiddenIfHasMessages}>This user has no posts yet.</p>
         {messagesUi}
-        <form method='post' enctype='multipart/form-data'>
-          <input type='file' name='myFile' />
-          <button type='submit' value='Submit'>
-            {' '}
-            Adds image
-          </button>
-        </form>
-        <Dropzone onDrop={this.onDrop}>
-          {({ getRootProps, getInputProps, isDragActive }) => (
-            <div {...getRootProps()}>
-              <input {...getInputProps()} />
-              {isDragActive
-                ? "Drop it like it's hot!"
-                : 'Click me or drag a file to upload!'}
-            </div>
-          )}
-        </Dropzone>
+        <input type='file' onchange='encodeImageFileAsURL(this)' />
+        <script>console.log(encodeImageFileAsURL(this))</script>
       </div>
     );
   }
