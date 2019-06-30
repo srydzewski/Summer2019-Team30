@@ -52,7 +52,6 @@ public class MessageServlet extends HttpServlet {
     String user = request.getParameter("user");
 
     if (user == null || user.equals("")) {
-      // Request is invalid, return empty array
       response.getWriter().println("[]");
       return;
     }
@@ -67,6 +66,7 @@ public class MessageServlet extends HttpServlet {
   /** Stores a new {@link Message}. */
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
     UserService userService = UserServiceFactory.getUserService();
     if (!userService.isUserLoggedIn()) {
       response.sendRedirect("/");
@@ -74,8 +74,6 @@ public class MessageServlet extends HttpServlet {
     }
 
     String user = userService.getCurrentUser().getEmail();
-    String text = Jsoup.clean(request.getParameter("text"), Whitelist.none());
-
     String userText = Jsoup.clean(request.getParameter("text"), Whitelist.none());
 
     String regex = "(https?://\\S+\\.(png|jpg))";
