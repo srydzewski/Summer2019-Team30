@@ -28,13 +28,8 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Avatar from '@material-ui/core/Avatar';
-import Box from '@material-ui/core/Box';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import IconButton from 'components/ui/IconButton.js';
-import Icon from 'components/ui/Icon.js';
-import Paper from '@material-ui/core/Paper';
-import blue from '@material-ui/core/colors/blue';
 
 /** Gets the parameters from the url. Parameters are after the ? in the url. */
 const urlParams = new URLSearchParams(window.location.search);

@@ -7,7 +7,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.google.codeu.data.Datastore;
 
 /** Handles adding a restaurant from a user to datastore. */
 @WebServlet("/api/restaurant")
