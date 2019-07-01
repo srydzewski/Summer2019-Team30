@@ -60,6 +60,7 @@ public class BlobStoreServlet extends HttpServlet {
     response.sendRedirect("/user-page.html?user=" + user);
   }
 
+  // should send a get request to display img
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
     String uploadUrl = blobstoreService.createUploadUrl("/messages");
