@@ -37,7 +37,7 @@ nav li {
   display: none;
 }
 
-.message-body img {
+img {
   display: block;
   margin-top: 25px;
   max-width: 75%;

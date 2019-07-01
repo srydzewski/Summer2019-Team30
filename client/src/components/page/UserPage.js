@@ -18,6 +18,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import { BLOBSTORE_SERVLET } from 'constants/links.js';
 import 'css/userPage.css';
 import { HIDDEN } from 'constants/css.js';
 import { MESSAGE } from 'constants/links.js';
@@ -25,8 +26,6 @@ import Message from 'components/ui/Message.js';
 import { ABOUT_ME_SERVLET } from '../../constants/links';
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import Dropzone from 'react-dropzone';
-
 /** Gets the parameters from the url. Parameters are after the ? in the url. */
 const urlParams = new URLSearchParams(window.location.search);
 /** The email of the currently displayed user. */
@@ -67,7 +66,7 @@ const submitMessage = function() {
   });
   window.location.reload();
 };
-const uploadImage = function() {};
+
 const submitAboutMe = function() {
   fetch(ABOUT_ME_SERVLET, {
     method: 'POST',
@@ -111,18 +110,11 @@ class UserPage extends Component {
       : null;
 
     const aboutUi = about ? about.content : null;
-    function encodeImageFileAsURL(element) {
-      var file = element.files[0];
-      var reader = new FileReader();
-      reader.onloadend = function() {
-        console.log('RESULT', reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
 
     return (
       <div className='container' style={{ margin: 5 }}>
         <h1 className='center'>{userEmailParam}</h1>
+        <hr /> <br />
         Enter a new message:
         <br />
         <CKEditor
@@ -145,10 +137,20 @@ class UserPage extends Component {
         <button onClick={submitAboutMe}>Submit</button>
         <br className={hiddenIfViewingOther} />
         <hr />
-        <p className={hiddenIfHasMessages}>This user has no posts yet.</p>
+        <p className={HIDDEN}>This user has no posts yet.</p>
         {messagesUi}
-        <input type='file' onchange='encodeImageFileAsURL(this)' />
-        <script>console.log(encodeImageFileAsURL(this))</script>
+        <form
+          id='message-form'
+          method='getUploadedFileUrl'
+          enctype='multipart/form-data'>
+          Enter a new message:
+          <br />
+          <textarea name='text' id='message-input' />
+          <br />
+          <input type='file' name='image' multiple />
+          <br />
+          <input type='submit' value='Submit' action={submitMessage} />
+        </form>
       </div>
     );
   }
