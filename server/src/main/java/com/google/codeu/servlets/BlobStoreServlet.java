@@ -8,9 +8,7 @@ import com.google.appengine.api.images.ImagesServiceFactory;
 import com.google.appengine.api.images.ServingUrlOptions;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
-import com.google.codeu.data.Datastore;
 import com.google.codeu.data.Message;
-import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -78,7 +76,8 @@ public class BlobStoreServlet extends HttpServlet {
     // User submitted form without selecting a file, so we can't get a URL.
     // (devserver)
     if (blobKeys == null || blobKeys.isEmpty()) {
-      System.out.printf("Assuming this is the devserver and nothing was uploaded; blobKeys: %s%n", blobKeys);
+      System.out.printf(
+          "Assuming this is the devserver and nothing was uploaded; blobKeys: %s%n", blobKeys);
       return null;
     }
 
