@@ -15,6 +15,7 @@
  */
 
 import React, { Component } from 'react';
+import Button from '@material-ui/core/Button';
 import {
   MESSAGE_FEED_SERVLET,
   TRANSLATION_SERVLET,
@@ -117,11 +118,15 @@ class PublicFeed extends Component {
             style={{ height: `100%`, width: `50%` }}
           />
           <br />
+          <Button variant='contained' color='primary'>
+            Post
+          </Button>
           <input type='submit' value='Submit' />
         </form>
         Addresses:
         {this.state.address}
         <hr />
+
         <CustomMap
           center={GOOGLEPLEX_COORD}
           zoom={DEFAULT_MAP_ZOOM}

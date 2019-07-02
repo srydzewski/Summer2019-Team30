@@ -44,6 +44,8 @@ export const ABOUT_ME_SERVLET = servletPrefix + '/about';
 export const MARKERS_SERVLET = servletPrefix + '/markers';
 /** Link to the restaurant servlet. */
 export const RESTAURANT_SERVLET = servletPrefix + '/restaurant';
+/** Link to the search servlet. */
+export const SEARCH_SERVLET = servletPrefix + '/search';
 
 export const MESSAGE_FEED = '/feed';
 /** Client link to the about page. */
