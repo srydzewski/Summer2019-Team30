@@ -50,7 +50,7 @@ public class LoginServlet extends HttpServlet {
       // stores the user in datastore if it's their first time signing in
       // TODO(brianch): Refactor User to use builder pattern
       if (datastore.getUser(user) == null) {
-        User newUser = new User(user, "");
+        User newUser = new User(user, "This is your about me");
         datastore.storeUser(newUser);
       }
       response.sendRedirect("/userpage?user=" + user);
