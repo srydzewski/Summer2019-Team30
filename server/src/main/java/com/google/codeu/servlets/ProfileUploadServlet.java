@@ -32,8 +32,7 @@ public class ProfileUploadServlet extends HttpServlet {
         String uploadUrl = blobstoreService.createUploadUrl("/api/store-image");
         response.setContentType("text/html");
         response.getWriter().println(uploadUrl);
-        UserService userService = UserServiceFactory.getUserService();
-        String email = userService.getCurrentUser().getEmail();
-        response.sendRedirect("/userpage?user=" + email);
+        System.out.printf(uploadUrl);
+
     }
 }

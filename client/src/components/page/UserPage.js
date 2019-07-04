@@ -24,7 +24,8 @@ import { MESSAGE } from 'constants/links.js';
 import Message from 'components/ui/Message.js';
 import {
   ABOUT_ME_SERVLET,
-  PROFILE_UPLOAD_SERVLET
+  PROFILE_UPLOAD_SERVLET,
+  PROFILE_PIC_SERVLET
 } from '../../constants/links';
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
@@ -34,6 +35,7 @@ import Avatar from '@material-ui/core/Avatar';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import FormControl from '@material-ui/core/FormControl';
+import samPic from 'statics/images/SamsPic2.JPG';
 
 /** Gets the parameters from the url. Parameters are after the ? in the url. */
 const urlParams = new URLSearchParams(window.location.search);
@@ -43,8 +45,10 @@ const userEmailParam = urlParams.get('user');
 const url1 = MESSAGE + '?user=' + userEmailParam;
 /** About url */
 const url2 = ABOUT_ME_SERVLET + '?user=' + userEmailParam;
+/**profile pic url */
+const url3 = PROFILE_PIC_SERVLET + '?user=' + userEmailParam;
 /** Promises */
-const promises = Promise.all([fetch(url1), fetch(url2)]);
+const promises = Promise.all([fetch(url1), fetch(url2), fetch(url3)]);
 /* User-Entered Message */
 var editorMessage = null;
 /* User-Entered About */
@@ -55,11 +59,12 @@ var editorPhotoUrl = null;
 const styles = function() {
   return {
     a: {
-      marginLeft: 50,
+      marginLeft: 30,
       marginTop: 10,
       width: 100,
       height: 100,
-      justify: 'center'
+      justify: 'center',
+      marginBottom: 20
     },
     submit: {
       marginTop: 10
@@ -112,12 +117,29 @@ const submitAboutMe = function() {
   });
   window.location.reload();
 };
+/** 
+const submitPic = function(url) {
+  var inputFileImage = document.getElementById('image');
+  if (inputFileImage !== null) {
+    var file = inputFileImage.files[0];
+    var data = new FormData();
+    data.append('image', file);
+    fetch(url, {
+      method: 'POST',
+      body: file
+    }).then(response => {
+      //window.location.reload();
+    });
+  }
+};
+*/
 
 /** Renders the /user-page page. */
 class UserPage extends Component {
   state = {
     messages: null,
     about: null,
+    profPic: '',
     photoURL: null
   };
 
@@ -125,8 +147,8 @@ class UserPage extends Component {
     promises
       .then(results => Promise.all(results.map(r => r.clone().json())))
       .then(results => {
-        const [messages, about] = results;
-        this.setState({ messages, about });
+        const [messages, about, profPic] = results;
+        this.setState({ messages, about, profPic });
       });
     this.fetchUrl();
   }
@@ -142,7 +164,7 @@ class UserPage extends Component {
   }
 
   render() {
-    const { messages, about, photoURL } = this.state;
+    const { messages, about, profPic, photoURL } = this.state;
 
     const { userEmail } = this.props.userData;
     const { classes } = this.props;
@@ -167,7 +189,8 @@ class UserPage extends Component {
             <Avatar
               className={classes.a}
               alt='My profile'
-              src='://cc-media-foxit.fichub.com/image/fox-it-mondofox/e8c0f288-781d-4d0b-98ad-fd169782b53b/scene-sottacqua-per-i-sequel-di-avatar-maxw-654.jpg'
+              src={profPic.content}
+              //src='://cc-media-foxit.fichub.com/image/fox-it-mondofox/e8c0f288-781d-4d0b-98ad-fd169782b53b/scene-sottacqua-per-i-sequel-di-avatar-maxw-654.jpg'
             />
           </Grid>
           <Grid item xs={3}>
@@ -195,16 +218,17 @@ class UserPage extends Component {
             </div>
           </Grid>
         </Grid>
+        <br />
         <Grid container>
           <Grid item xs={2}>
             <form
               className={hiddenIfViewingOther}
               encType='multipart/form-data'
-              //onSubmit={submitPic}
+              //onSubmit={submitPic(photoURL)}
               method='POST'
               action={photoURL}>
               Upload Profile Picture
-              <input type='file' name='image' />
+              <input type='file' name='image' id='image' />
               <input type='submit' value='Submit' />
             </form>
           </Grid>
