@@ -22,7 +22,10 @@ import 'css/userPage.css';
 import { HIDDEN } from 'constants/css.js';
 import { MESSAGE } from 'constants/links.js';
 import Message from 'components/ui/Message.js';
-import { ABOUT_ME_SERVLET } from '../../constants/links';
+import {
+  ABOUT_ME_SERVLET,
+  PROFILE_UPLOAD_SERVLET
+} from '../../constants/links';
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import Button from '@material-ui/core/Button';
@@ -30,6 +33,7 @@ import Grid from '@material-ui/core/Grid';
 import Avatar from '@material-ui/core/Avatar';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import FormControl from '@material-ui/core/FormControl';
 
 /** Gets the parameters from the url. Parameters are after the ? in the url. */
 const urlParams = new URLSearchParams(window.location.search);
@@ -45,6 +49,8 @@ const promises = Promise.all([fetch(url1), fetch(url2)]);
 var editorMessage = null;
 /* User-Entered About */
 var editorAbout = 'This is your about me.';
+/**User-entered photo url */
+var editorPhotoUrl = null;
 
 const styles = function() {
   return {
@@ -106,11 +112,13 @@ const submitAboutMe = function() {
   });
   window.location.reload();
 };
+
 /** Renders the /user-page page. */
 class UserPage extends Component {
   state = {
     messages: null,
-    about: null
+    about: null,
+    photoURL: null
   };
 
   componentDidMount() {
@@ -120,10 +128,21 @@ class UserPage extends Component {
         const [messages, about] = results;
         this.setState({ messages, about });
       });
+    this.fetchUrl();
+  }
+
+  fetchUrl() {
+    fetch(PROFILE_UPLOAD_SERVLET)
+      .then(response => {
+        return response.text();
+      })
+      .then(imageUploadUrl => {
+        this.setState({ photoURL: imageUploadUrl });
+      });
   }
 
   render() {
-    const { messages, about } = this.state;
+    const { messages, about, photoURL } = this.state;
 
     const { userEmail } = this.props.userData;
     const { classes } = this.props;
@@ -148,7 +167,7 @@ class UserPage extends Component {
             <Avatar
               className={classes.a}
               alt='My profile'
-              src='https://cc-media-foxit.fichub.com/image/fox-it-mondofox/e8c0f288-781d-4d0b-98ad-fd169782b53b/scene-sottacqua-per-i-sequel-di-avatar-maxw-654.jpg'
+              src='://cc-media-foxit.fichub.com/image/fox-it-mondofox/e8c0f288-781d-4d0b-98ad-fd169782b53b/scene-sottacqua-per-i-sequel-di-avatar-maxw-654.jpg'
             />
           </Grid>
           <Grid item xs={3}>
@@ -177,7 +196,18 @@ class UserPage extends Component {
           </Grid>
         </Grid>
         <Grid container>
-          <Grid item xs={2} />
+          <Grid item xs={2}>
+            <form
+              className={hiddenIfViewingOther}
+              encType='multipart/form-data'
+              //onSubmit={submitPic}
+              method='POST'
+              action={photoURL}>
+              Upload Profile Picture
+              <input type='file' name='image' />
+              <input type='submit' value='Submit' />
+            </form>
+          </Grid>
           <Grid item xs={3}>
             {aboutUi}
           </Grid>
