@@ -40,6 +40,58 @@ const styles = function() {
     }
   };
 };
+const style = function() {
+  return {
+    card: {
+      // flexDirection: 'row',
+      height: undefined,
+      width: undefined,
+      // alignSelf: 'center',
+      marginBottom: 3,
+      marginTop: 3,
+      borderRadius: 3
+    },
+    cardItem: {
+      borderLeftWidth: 5,
+      borderLeftColor: '#ea7e7a'
+    }
+  };
+};
+
+ MessagesCard = function(props) {
+  return (
+    <div className='Message message-div'>
+      <CardActionArea>
+        <div className='message-header'>
+          <CardHeader title={props.user} subheader={props.timestamp} />
+        </div>
+        <CardContent>
+          <CardMedia>
+            {<div dangerouslySetInnerHTML={{ __html: props.text }} />}
+          </CardMedia>
+        </CardContent>
+      </CardActionArea>
+    </div>
+  );
+};
+const ImageCard = function(props) {
+  return (
+    <div>
+      <CardActionArea>
+        <ButtonBase
+          className={props.classes.cardAction}
+          onClick={event => {MessagesCard}
+          }>
+          <CardContent>
+            <CardMedia>
+              {<div dangerouslySetInnerHTML={{ __html: props.text }} />}
+            </CardMedia>
+          </CardContent>
+        </ButtonBase>
+      </CardActionArea>
+    </div>
+  );
+};
 
 class MessagesCard extends React.Component {
   render() {
