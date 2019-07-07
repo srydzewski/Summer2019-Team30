@@ -21,12 +21,43 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Card from '@material-ui/core/Card';
+import ButtonBase from '@material-ui/core/ButtonBase';
 
 /**
  * A message card.
  * @return The html representation of the card.
  */
-const MessagesCard = function(props) {
+const styles = function() {
+  return {
+    card: {
+      maxWidth: 400,
+      margin: 24
+    },
+    media: {
+      height: 0,
+      paddingTop: '75%'
+    }
+  };
+};
+const style = function() {
+  return {
+    card: {
+      // flexDirection: 'row',
+      height: undefined,
+      width: undefined,
+      // alignSelf: 'center',
+      marginBottom: 3,
+      marginTop: 3,
+      borderRadius: 3
+    },
+    cardItem: {
+      borderLeftWidth: 5,
+      borderLeftColor: '#ea7e7a'
+    }
+  };
+};
+
+ MessagesCard = function(props) {
   return (
     <div className='Message message-div'>
       <CardActionArea>
@@ -42,6 +73,24 @@ const MessagesCard = function(props) {
     </div>
   );
 };
+const ImageCard = function(props) {
+  return (
+    <div>
+      <CardActionArea>
+        <ButtonBase
+          className={props.classes.cardAction}
+          onClick={event => {MessagesCard}
+          }>
+          <CardContent>
+            <CardMedia>
+              {<div dangerouslySetInnerHTML={{ __html: props.text }} />}
+            </CardMedia>
+          </CardContent>
+        </ButtonBase>
+      </CardActionArea>
+    </div>
+  );
+};
 
 const Message = function(props) {
   return (
@@ -53,7 +102,16 @@ const Message = function(props) {
     </div>
   );
 };
-
+class CardUI extends React.Component{
+  render() {
+    return {
+      <div>
+    < ImageCard />
+    <MessagesCard />
+    </div>
+    }
+  }
+}
 Message.propTypes = {
   /** Name of the user posting the message. */
   user: PropTypes.string,
@@ -62,5 +120,4 @@ Message.propTypes = {
   /** The content of the message. */
   text: PropTypes.string
 };
-
-export default MessagesCard;
+export default CardUI;
