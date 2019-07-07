@@ -16,11 +16,32 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Card from '@material-ui/core/Card';
 
 /**
  * A message card.
  * @return The html representation of the card.
  */
+const MessagesCard = function(props) {
+  return (
+    <div className='Message message-div'>
+      <CardActionArea>
+        <div className='message-header'>
+          <CardHeader title={props.user} subheader={props.timestamp} />
+        </div>
+        <CardContent>
+          <CardMedia>
+            {<div dangerouslySetInnerHTML={{ __html: props.text }} />}
+          </CardMedia>
+        </CardContent>
+      </CardActionArea>
+    </div>
+  );
+};
 
 const Message = function(props) {
   return (
@@ -42,4 +63,4 @@ Message.propTypes = {
   text: PropTypes.string
 };
 
-export default Message;
+export default MessagesCard;
