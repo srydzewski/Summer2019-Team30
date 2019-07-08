@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/** Gets the profile pic that was uploaded to Blobstore and posts it to the user page */
+/** Gets the profile pic that was uploaded to Blobstore and posts it to the user page. */
 @WebServlet("/api/store-image")
 public class ProfilePicServlet extends HttpServlet {
 

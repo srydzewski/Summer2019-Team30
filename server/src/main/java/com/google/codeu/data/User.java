@@ -13,11 +13,11 @@ public class User {
   }
 
   /**
-   * Constructs a new User
+   * Constructs a new User.
    *
    * @param email The email of the user.
    * @param aboutMe The user's bio.
-   * @param profilePic The profile picture of the user.
+   * @param pic The profile picture of the user.
    */
   public User(String email, String aboutMe, String pic) {
     this.email = email;
