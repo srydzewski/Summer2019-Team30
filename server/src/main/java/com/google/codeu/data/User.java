@@ -9,9 +9,16 @@ public class User {
   public User(String email, String aboutMe) {
     this.email = email;
     this.aboutMe = aboutMe;
-    this.profilePic = "://cc-media-foxit.fichub.com/image/fox-it-mondofox/e8c0f288-781d-4d0b-98ad-fd169782b53b/scene-sottacqua-per-i-sequel-di-avatar-maxw-654.jpg";
+    this.profilePic = "";
   }
 
+  /**
+   * Constructs a new User
+   *
+   * @param email The email of the user.
+   * @param aboutMe The user's bio.
+   * @param profilePic The profile picture of the user.
+   */
   public User(String email, String aboutMe, String pic) {
     this.email = email;
     this.aboutMe = aboutMe;

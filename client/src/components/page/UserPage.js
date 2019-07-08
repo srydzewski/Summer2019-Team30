@@ -34,8 +34,6 @@ import Grid from '@material-ui/core/Grid';
 import Avatar from '@material-ui/core/Avatar';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import FormControl from '@material-ui/core/FormControl';
-import samPic from 'statics/images/SamsPic2.JPG';
 
 /** Gets the parameters from the url. Parameters are after the ? in the url. */
 const urlParams = new URLSearchParams(window.location.search);
