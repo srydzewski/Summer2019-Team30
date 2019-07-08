@@ -27,14 +27,13 @@ public class Restaurant {
   private double lat;
   private double lng;
 
-
   /**
    * Construct a new Restaurant and convert an address to a latitude and longnitude.
    *
    * @param restAddress Address of the Restaurant given.
    */
   public Restaurant(String restAddress) {
-    /** Convert Address into Latitude and Longitude.  */
+    /** Convert Address into Latitude and Longitude. */
     id = UUID.randomUUID();
     name = "";
     address = restAddress;
