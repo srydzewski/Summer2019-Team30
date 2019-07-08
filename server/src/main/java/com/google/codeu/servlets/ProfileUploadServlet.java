@@ -8,10 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.google.appengine.api.users.UserService;
-import com.google.appengine.api.users.UserServiceFactory;
 import com.google.codeu.data.Datastore;
-import com.google.codeu.data.User;
 
 /**
  * Provides access to a URL that allows a user to upload an image to Blobstore.
@@ -32,7 +29,6 @@ public class ProfileUploadServlet extends HttpServlet {
         String uploadUrl = blobstoreService.createUploadUrl("/api/store-image");
         response.setContentType("text/html");
         response.getWriter().println(uploadUrl);
-        System.out.printf(uploadUrl);
 
     }
 }

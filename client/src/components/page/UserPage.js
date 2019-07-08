@@ -77,6 +77,10 @@ const styles = function() {
       fontSize: 35,
       marginTop: 30,
       fontFamily: 'PT Sans'
+    },
+    aboutMe: {
+      marginLeft: 10,
+      marginTop: -40
     }
   };
 };
@@ -117,23 +121,6 @@ const submitAboutMe = function() {
   });
   window.location.reload();
 };
-/** 
-const submitPic = function(url) {
-  var inputFileImage = document.getElementById('image');
-  if (inputFileImage !== null) {
-    var file = inputFileImage.files[0];
-    var data = new FormData();
-    data.append('image', file);
-    fetch(url, {
-      method: 'POST',
-      body: file
-    }).then(response => {
-      //window.location.reload();
-    });
-  }
-};
-*/
-
 /** Renders the /user-page page. */
 class UserPage extends Component {
   state = {
@@ -190,7 +177,6 @@ class UserPage extends Component {
               className={classes.a}
               alt='My profile'
               src={profPic.content}
-              //src='://cc-media-foxit.fichub.com/image/fox-it-mondofox/e8c0f288-781d-4d0b-98ad-fd169782b53b/scene-sottacqua-per-i-sequel-di-avatar-maxw-654.jpg'
             />
           </Grid>
           <Grid item xs={3}>
@@ -200,6 +186,9 @@ class UserPage extends Component {
             item
             xs={6}
             style={{ height: 30, marginTop: 10, marginLeft: 60 }}>
+            <Typography className={classes.words} variant='h5'>
+              Enter your bio:
+            </Typography>
             <div className={hiddenIfViewingOther}>
               <CKEditor
                 editor={ClassicEditor}
@@ -219,12 +208,11 @@ class UserPage extends Component {
           </Grid>
         </Grid>
         <br />
-        <Grid container>
+        <Grid container spacing={10}>
           <Grid item xs={2}>
             <form
               className={hiddenIfViewingOther}
               encType='multipart/form-data'
-              //onSubmit={submitPic(photoURL)}
               method='POST'
               action={photoURL}>
               Upload Profile Picture
@@ -232,8 +220,8 @@ class UserPage extends Component {
               <input type='submit' value='Submit' />
             </form>
           </Grid>
-          <Grid item xs={3}>
-            {aboutUi}
+          <Grid item xs={3} className={classes.aboutMe}>
+            <Typography className={classes.words}>{aboutUi}</Typography>
           </Grid>
         </Grid>
         <br />

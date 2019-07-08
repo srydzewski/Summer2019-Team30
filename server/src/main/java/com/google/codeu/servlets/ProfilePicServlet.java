@@ -67,7 +67,6 @@ public class ProfilePicServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         UserService userService = UserServiceFactory.getUserService();
-        System.out.printf("*****hello******");
         // if not logged in do nothing
         if (!userService.isUserLoggedIn()) {
             return;
@@ -93,7 +92,6 @@ public class ProfilePicServlet extends HttpServlet {
             String imageUrl = imagesService.getServingUrl(options);
             // updates the user to include the image as their profile picture
             User userNew = new User(email, user.getAboutMe(), imageUrl);
-            System.out.printf("*****storing url*****");
             datastore.storeUser(userNew);
         }
         response.sendRedirect("/userpage?user=" + email);
