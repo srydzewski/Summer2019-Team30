@@ -3,13 +3,14 @@ package com.google.codeu.servlets;
 import com.google.codeu.data.Datastore;
 import com.google.codeu.data.Restaurant;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import java.io.IOException;
-import java.util.List;
+import java.util.Map;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.jsoup.Jsoup;
+import org.jsoup.safety.Whitelist;
 
 /** Handles adding a restaurant from a user to datastore. */
 @WebServlet("/api/restaurant")
@@ -25,19 +26,25 @@ public class RestaurantServlet extends HttpServlet {
   /** Respond by returning a new list of Restaurants in JSON. */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    JsonObject jsonObject = new JsonObject();
-    List<String> addresses = datastore.getRestaurants();
-    Gson gson = new Gson();
-    String json = gson.toJson(addresses);
-    jsonObject.addProperty("addresses", json);
     response.setContentType("application/json");
-    response.getWriter().println(jsonObject.toString());
+    Map<String, Map<String, String>> restaurants = datastore.getRestaurants();
+    Gson gson = new Gson();
+    String json = gson.toJson(restaurants);
+    response.getOutputStream().println(json);
   }
 
   /** Respond by storing the name and location of a Restaurant. */
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    Restaurant restaurant = new Restaurant(request.getParameter("text"));
+    // Parse the request into the Restaurant name and address
+    String name = Jsoup.clean(request.getParameter("name"), Whitelist.none());
+    String address = Jsoup.clean(request.getParameter("address"), Whitelist.none());
+    String bio = Jsoup.clean(request.getParameter("bio"), Whitelist.none());
+    if (name.length() == 0 || address.length() == 0 || bio.length() == 0) {
+      response.sendRedirect("/feed");
+      return;
+    }
+    Restaurant restaurant = new Restaurant(name, address, bio);
     datastore.storeRestaurant(restaurant);
     response.sendRedirect("/feed");
   }
