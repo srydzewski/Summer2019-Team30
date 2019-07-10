@@ -80,4 +80,3 @@ Message.propTypes = {
 };
 
 export default withStyles(styles)(MessagesCard);
-//export default Message;
