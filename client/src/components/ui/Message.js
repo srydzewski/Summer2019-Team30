@@ -58,7 +58,7 @@ const style = function() {
   };
 };
 
- MessagesCard = function(props) {
+MessagesCard = function(props) {
   return (
     <div className='Message message-div'>
       <CardActionArea>
@@ -70,24 +70,6 @@ const style = function() {
             {<div dangerouslySetInnerHTML={{ __html: props.text }} />}
           </CardMedia>
         </CardContent>
-      </CardActionArea>
-    </div>
-  );
-};
-const ImageCard = function(props) {
-  return (
-    <div>
-      <CardActionArea>
-        <ButtonBase
-          className={props.classes.cardAction}
-          onClick={event => {MessagesCard}
-          }>
-          <CardContent>
-            <CardMedia>
-              {<div dangerouslySetInnerHTML={{ __html: props.text }} />}
-            </CardMedia>
-          </CardContent>
-        </ButtonBase>
       </CardActionArea>
     </div>
   );
