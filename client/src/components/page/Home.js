@@ -20,13 +20,11 @@ import Typography from '@material-ui/core/Typography';
 import background_icon from 'statics/images/food_icon.jpg';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
+import Message from 'components/ui/Message.js';
 import PropTypes from 'prop-types';
 import grey from '@material-ui/core/colors/grey';
 import blue from '@material-ui/core/colors/blue';
 import { SEARCH_SERVLET } from 'constants/links.js';
-
-/* User-Entered Search */
-var searchVal = null;
 
 const styles = function() {
   return {
@@ -80,6 +78,8 @@ const userEmailParam = urlParams.get('user');
 const url = SEARCH_SERVLET + '?user=' + userEmailParam;
 /** Promises */
 const promises = Promise.all([fetch(url)]);
+/** User-Entered Value */
+const searchVal = null;
 
 class Home extends Component {
   constructor(props) {

@@ -61,6 +61,7 @@ public class SearchServlet extends HttpServlet {
 
       Gson modifiedGson = new Gson();
       String json = gson.toJson(filteredMessages);
+      request.setAttribute("filteredMessages", filteredMessages);
       response.getWriter().println(json);
       return;
     }
