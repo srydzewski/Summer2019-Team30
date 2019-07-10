@@ -25,7 +25,9 @@ import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /** Provides access to the data stored in Datastore. */
@@ -45,6 +47,7 @@ public class Datastore {
     Entity userEntity = new Entity("User", user.getEmail());
     userEntity.setProperty("email", user.getEmail());
     userEntity.setProperty("aboutMe", user.getAboutMe());
+    userEntity.setProperty("profPic", user.getProfilePic());
     datastore.put(userEntity);
   }
 
@@ -61,7 +64,8 @@ public class Datastore {
     }
 
     String aboutMe = (String) userEntity.getProperty("aboutMe");
-    User user = new User(email, aboutMe);
+    String profPic = (String) userEntity.getProperty("profPic");
+    User user = new User(email, aboutMe, profPic);
 
     return user;
   }
@@ -165,20 +169,24 @@ public class Datastore {
   /** Store the address of a Restaurant. */
   public void storeRestaurant(Restaurant restaurant) {
     Entity restaurantEntity = new Entity("Restaurant", restaurant.getId().toString());
+    restaurantEntity.setProperty("name", restaurant.getName());
     restaurantEntity.setProperty("address", restaurant.getAddress());
-    restaurantEntity.setProperty("lat", restaurant.getLat());
-    restaurantEntity.setProperty("lng", restaurant.getLng());
+    restaurantEntity.setProperty("bio", restaurant.getBio());
     datastore.put(restaurantEntity);
   }
 
   /** Get the addresses of all stored Restaurants. */
-  public List<String> getRestaurants() {
-    List<String> restaurants = new ArrayList<>();
+  public Map<String, Map<String, String>> getRestaurants() {
+    Map<String, Map<String, String>> restaurants = new HashMap<>();
     Query query = new Query("Restaurant");
     PreparedQuery results = datastore.prepare(query);
     for (Entity entity : results.asIterable()) {
       String address = (String) entity.getProperty("address");
-      restaurants.add(address);
+      String name = (String) entity.getProperty("name");
+      String bio = (String) entity.getProperty("bio");
+      Map<String, String> addBio = new HashMap<>();
+      addBio.put(address, bio);
+      restaurants.put(name, addBio);
     }
     return restaurants;
   }

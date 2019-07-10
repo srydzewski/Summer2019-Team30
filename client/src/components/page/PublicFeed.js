@@ -15,7 +15,6 @@
  */
 
 import React, { Component } from 'react';
-import Button from '@material-ui/core/Button';
 import {
   MESSAGE_FEED_SERVLET,
   TRANSLATION_SERVLET,
@@ -27,8 +26,14 @@ import CustomMap from 'components/ui/CustomMap.js';
 
 const GOOGLE_MAPS_API_URL =
   'https://maps.googleapis.com/maps/api/js?key=AIzaSyAi9TMtkY74gzfmjPkD7w1Tu-zyABHYlww&v=3.exp&libraries=geometry,drawing,places';
-const DEFAULT_MAP_ZOOM = 15;
-const GOOGLEPLEX_COORD = { lat: 37.422, lng: -122.084 };
+const DEFAULT_MAP_ZOOM = 1;
+const CENTER_EARTH = { lat: 20, lng: 0 };
+const GOOGLE_MAPS_API = 'AIzaSyAi9TMtkY74gzfmjPkD7w1Tu-zyABHYlww';
+/** Promises */
+const promises = Promise.all([
+  fetch(MESSAGE_FEED_SERVLET),
+  fetch(RESTAURANT_SERVLET)
+]);
 
 const buildMessages = function(content) {
   return (
@@ -43,29 +48,26 @@ const buildMessages = function(content) {
 class PublicFeed extends Component {
   state = {
     content: null,
-    address: null
+    restaurants: null
   };
 
+  markers = {};
+
   componentDidMount() {
-    this.fetchMessages();
-    this.fetchRestaurants();
-  }
-  fetchMessages() {
-    fetch(MESSAGE_FEED_SERVLET)
-      .then(response => {
-        return response.json();
-      })
-      .then(content => {
-        this.setState({ content: content });
+    promises
+      .then(results => Promise.all(results.map(r => r.clone().json())))
+      .then(results => {
+        const [messageFeed, restaurant] = results;
+        this.setState({ messageFeed, restaurant });
       });
   }
-  fetchRestaurants() {
-    fetch(RESTAURANT_SERVLET)
-      .then(response => {
-        return response.json();
-      })
-      .then(content => {
-        this.setState({ address: content.addresses });
+
+  /** Will fetch the coordinates of an address */
+  fetchCoordinates(address, key) {
+    fetch(address)
+      .then(response => response.json())
+      .then(responseJson => {
+        this.markers[key].coord = responseJson.results[0].geometry.location;
       });
   }
 
@@ -106,31 +108,73 @@ class PublicFeed extends Component {
       ? value.map(content => buildMessages(content))
       : null;
     const hideIfFullyLoaded = !messageList ? null : HIDDEN;
+    const restaurantList = !this.state.restaurants
+      ? null
+      : this.state.restaurants;
+    var key = 1;
+    if (restaurantList) {
+      for (const [restName, addBio] of Object.entries(restaurantList)) {
+        this.markers[key] = {};
+        this.markers[key].name = restName;
+        this.markers[key].description = addBio[Object.keys(addBio)[0]];
+        // Here we perform the Geocoding to get the latitude and longitude
+        const address = Object.keys(addBio)[0]
+          .split(' ')
+          .join('+');
+        const httpAddress =
+          'https://maps.googleapis.com/maps/api/geocode/json?address=' +
+          address +
+          '&key=' +
+          GOOGLE_MAPS_API;
+        this.fetchCoordinates(httpAddress, key);
+        if (key === 1) {
+          this.markers.keys = [key];
+        } else {
+          this.markers.keys.push(key);
+        }
+        key++;
+      }
+    }
     return (
       <div id='content' style={{ margin: 5 }}>
         <h1>Make a Post</h1>
-        <hr /> Add Restaurant Address
+        <hr />
+        Add Your Favorite Restaurant's Name!
+        <br />
         <form action={RESTAURANT_SERVLET} method='POST'>
           <br />
           <textarea
-            name='text'
+            name='name'
             className='message-input'
             style={{ height: `100%`, width: `50%` }}
           />
           <br />
-          <Button variant='contained' color='primary'>
-            Post
-          </Button>
+          Add the Restaurant's address <br />
+          (Ex. 1600 Amphitheatre Pkwy, Mountain View, CA)
+          <br />
+          <textarea
+            name='address'
+            className='message-input'
+            style={{ height: `100%`, width: `50%` }}
+          />
+          <br />
+          Add Why You Like the Restaurant.
+          <br />
+          <textarea
+            name='bio'
+            className='message-input'
+            style={{ height: `100%`, width: `50%` }}
+          />
+          <br />
           <input type='submit' value='Submit' />
         </form>
-        Addresses:
-        {this.state.address}
         <hr />
-
+        See Others Favorite Restaurants!
         <CustomMap
-          center={GOOGLEPLEX_COORD}
+          center={CENTER_EARTH}
           zoom={DEFAULT_MAP_ZOOM}
           googleMapURL={GOOGLE_MAPS_API_URL}
+          markers={this.markers}
           loadingElement={<div style={{ height: `100%` }} />}
           containerElement={<div style={{ height: `500px` }} />}
           mapElement={<div style={{ height: `100%`, width: `50%` }} />}

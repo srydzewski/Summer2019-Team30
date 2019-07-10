@@ -64,6 +64,5 @@ public class SearchServlet extends HttpServlet {
       response.getWriter().println(json);
       return;
     }
-    response.getWriter().println("");
   }
 }
