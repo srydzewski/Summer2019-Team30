@@ -24,36 +24,34 @@ public class Restaurant {
   private UUID id;
   private String name;
   private String address;
-  private double lat;
-  private double lng;
+  private String bio;
 
   /**
    * Construct a new Restaurant and convert an address to a latitude and longnitude.
    *
    * @param restAddress Address of the Restaurant given.
    */
-  public Restaurant(String restAddress) {
+  public Restaurant(String restName, String restAddress, String restBio) {
     /** Convert Address into Latitude and Longitude. */
     id = UUID.randomUUID();
-    name = "";
+    name = restName;
     address = restAddress;
-    lat = 0.0;
-    lng = 0.0;
+    bio = restBio;
   }
 
   public UUID getId() {
     return id;
   }
 
+  public String getName() {
+    return name;
+  }
+
   public String getAddress() {
     return address;
   }
 
-  public double getLat() {
-    return lat;
-  }
-
-  public double getLng() {
-    return lng;
+  public String getBio() {
+    return bio;
   }
 }
