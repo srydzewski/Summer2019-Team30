@@ -3,6 +3,10 @@ package com.google.codeu.servlets;
 import com.google.codeu.data.Datastore;
 import com.google.codeu.data.Restaurant;
 import com.google.gson.Gson;
+import com.google.maps.GeoApiContext;
+import com.google.maps.GeocodingApi;
+import com.google.maps.errors.ApiException;
+import com.google.maps.model.GeocodingResult;
 import java.io.IOException;
 import java.util.Map;
 import javax.servlet.annotation.WebServlet;
@@ -17,6 +21,7 @@ import org.jsoup.safety.Whitelist;
 public class RestaurantServlet extends HttpServlet {
 
   private Datastore datastore;
+  private String apiKey = "AIzaSyAi9TMtkY74gzfmjPkD7w1Tu-zyABHYlww";
 
   @Override
   public void init() {
@@ -27,7 +32,7 @@ public class RestaurantServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("application/json");
-    Map<String, Map<String, String>> restaurants = datastore.getRestaurants();
+    Map<String, Map<String, Map<Double, Double>>> restaurants = datastore.getRestaurants();
     Gson gson = new Gson();
     String json = gson.toJson(restaurants);
     response.getOutputStream().println(json);
@@ -44,8 +49,32 @@ public class RestaurantServlet extends HttpServlet {
       response.sendRedirect("/feed");
       return;
     }
-    Restaurant restaurant = new Restaurant(name, address, bio);
+    // Find the coords of the address
+    Double[] coord = new Double[2];
+    try {
+      coord = this.lookupCoord(address);
+    } catch (ApiException | InterruptedException | IOException a) {
+      response.sendRedirect("/feed");
+      return;
+    }
+    Double restLat = coord[0];
+    Double restLng = coord[1];
+    Restaurant restaurant = new Restaurant(name, address, bio, restLat, restLng);
     datastore.storeRestaurant(restaurant);
     response.sendRedirect("/feed");
+  }
+
+  /** Will return a 2 element array of the latitude and longitude of an address. */
+  public Double[] lookupCoord(String address)
+      throws ApiException, InterruptedException, IOException {
+    // set up key
+    GeoApiContext geocoder = new GeoApiContext.Builder().apiKey(apiKey).build();
+    GeocodingResult[] results = GeocodingApi.geocode(geocoder, address).await();
+
+    // converts results into usable Coordinates
+    Double[] coord = new Double[2];
+    coord[0] = results[0].geometry.location.lat;
+    coord[1] = results[0].geometry.location.lng;
+    return coord;
   }
 }
