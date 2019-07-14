@@ -25,6 +25,9 @@ import PropTypes from 'prop-types';
 import grey from '@material-ui/core/colors/grey';
 import blue from '@material-ui/core/colors/blue';
 import { SEARCH_SERVLET } from 'constants/links.js';
+import Button from '@material-ui/core/Button';
+import CKEditor from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 const styles = function() {
   return {
@@ -70,16 +73,22 @@ const styles = function() {
   };
 };
 
-/** Gets the parameters from the url. Parameters are after the ? in the url. */
-const urlParams = new URLSearchParams(window.location.search);
-/** The email of the currently displayed user. */
-const userEmailParam = urlParams.get('user');
-/** Message url */
-const url = SEARCH_SERVLET + '?user=' + userEmailParam;
+/** User-Entered Value */
+var searchVal = null;
+/** Search url */
+const url = SEARCH_SERVLET + '?query=' + searchVal;
 /** Promises */
 const promises = Promise.all([fetch(url)]);
-/** User-Entered Value */
-const searchVal = null;
+
+const submitSearch = function() {
+  fetch(SEARCH_SERVLET, {
+    method: 'POST',
+    headers: new Headers({
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }),
+    body: 'search=' + searchVal
+  });
+};
 
 class Home extends Component {
   constructor(props) {
@@ -115,10 +124,24 @@ class Home extends Component {
           <Typography className={classes.avatar} component='h1' variant='h5'>
             Tip of My Tongue
           </Typography>
-          <form action={SEARCH_SERVLET} method='GET'>
+          <form action={SEARCH_SERVLET} method='POST' id='searchIn'>
             <textarea name='search' className={classes.form} noValidate />
-            <input type='submit' value='Search' />
+            <input
+              type='submit'
+              value='Search'
+              onChange={event => {
+                searchVal = document.getElementById('searchIn', event).value;
+                console.log(searchVal);
+              }}
+            />
           </form>
+          <Button
+            onClick={submitSearch}
+            className={classes.submit}
+            variant='contained'
+            color='primary'>
+            Search
+          </Button>
         </div>
       </Grid>
     );

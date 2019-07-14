@@ -63,4 +63,4 @@ export const STATS = '/stats';
 /**Client link to the community page. */
 export const COMMUNITY_PAGE = '/user-list';
 /**Client link to the search page. */
-export const SEARCH_RESULTS = '/results';
+export const SEARCH_RESULTS = '/search';

@@ -62,9 +62,17 @@ public class SearchServlet extends HttpServlet {
       Gson modifiedGson = new Gson();
       String json = gson.toJson(filteredMessages);
       request.setAttribute("filteredMessages", filteredMessages);
-      response.getWriter().println(json);
-      //response.sendRedirect("/results");
+      // response.getWriter().println(json);
+      // response.sendRedirect("/results");
       return;
     }
+  }
+
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    String search = request.getParameter("search");
+    System.out.println(search);
+
+    response.sendRedirect("/search?query=" + search);
   }
 }
