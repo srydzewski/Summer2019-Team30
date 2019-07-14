@@ -102,6 +102,10 @@ class Home extends Component {
     searchVal = event.target.value;
   };
 
+  updateData(data) {
+    this.setState({ data });
+  }
+
   render() {
     const { classes } = this.props;
     return (

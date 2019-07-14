@@ -63,6 +63,7 @@ public class SearchServlet extends HttpServlet {
       String json = gson.toJson(filteredMessages);
       request.setAttribute("filteredMessages", filteredMessages);
       response.getWriter().println(json);
+      //response.sendRedirect("/results");
       return;
     }
   }
