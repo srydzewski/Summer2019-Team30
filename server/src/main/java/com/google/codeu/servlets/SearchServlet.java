@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.google.gson.JsonObject;
 
 /**
  * Returns to the request for list of messages that contain specific keyword for a specific user.
@@ -58,21 +59,17 @@ public class SearchServlet extends HttpServlet {
           filteredMessages.add(messages.get(i));
         }
       }
-
-      Gson modifiedGson = new Gson();
-      String json = gson.toJson(filteredMessages);
-      request.setAttribute("filteredMessages", filteredMessages);
-      // response.getWriter().println(json);
-      // response.sendRedirect("/results");
-      return;
+    Gson modifiedGson = new Gson();
+    String json = gson.toJson(filteredMessages);
+    request.setAttribute("filteredMessages", filteredMessages);
+    response.getWriter().println(filteredMessages);    
     }
   }
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String search = request.getParameter("search");
-    System.out.println(search);
-
+   
     response.sendRedirect("/search?query=" + search);
   }
 }
