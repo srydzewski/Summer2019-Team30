@@ -43,7 +43,7 @@ public class SearchServlet extends HttpServlet {
       return;
     }
 
-    String keyword = request.getParameter("search");
+    String keyword = request.getParameter("query");
 
     List<Message> messages = datastore.getAllMessages();
     List<Message> filteredMessages = new ArrayList<>();
@@ -58,11 +58,17 @@ public class SearchServlet extends HttpServlet {
           filteredMessages.add(messages.get(i));
         }
       }
-
       Gson modifiedGson = new Gson();
       String json = gson.toJson(filteredMessages);
+      request.setAttribute("filteredMessages", filteredMessages);
       response.getWriter().println(json);
-      return;
     }
+  }
+
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    String search = request.getParameter("search");
+
+    response.sendRedirect("/search?query=" + search);
   }
 }
