@@ -17,7 +17,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import ReactHashtag from 'react-hashtag';
 import 'css/userPage.css';
 import { HIDDEN } from 'constants/css.js';
 import { MESSAGE } from 'constants/links.js';
@@ -51,8 +50,6 @@ const promises = Promise.all([fetch(url1), fetch(url2), fetch(url3)]);
 var editorMessage = null;
 /* User-Entered About */
 var editorAbout = 'This is your about me.';
-/**User-entered photo url */
-var editorPhotoUrl = null;
 
 const styles = function() {
   return {
@@ -165,7 +162,8 @@ class UserPage extends Component {
       ? messages.map(message => createMessageUi(message))
       : null;
 
-    const aboutUi = about ? about.content : null;
+    //format for setting inner html
+    const aboutUi = about ? { __html: about.content } : null;
 
     return (
       <div className='container' style={{ margin: 10 }}>
@@ -184,7 +182,7 @@ class UserPage extends Component {
             item
             xs={6}
             style={{ height: 30, marginTop: 10, marginLeft: 60 }}>
-            <Typography className={classes.words} variant='h5'>
+            <Typography className={classes.words} variant='h6'>
               Enter your bio:
             </Typography>
             <div className={hiddenIfViewingOther}>
@@ -213,13 +211,15 @@ class UserPage extends Component {
               encType='multipart/form-data'
               method='POST'
               action={photoURL}>
-              Upload Profile Picture
+              <Typography variant='body1'>Upload a profile picture</Typography>
               <input type='file' name='image' id='image' />
               <input type='submit' value='Submit' />
             </form>
           </Grid>
           <Grid item xs={3} className={classes.aboutMe}>
-            <Typography className={classes.words}>{aboutUi}</Typography>
+            <Typography className={classes.words}>
+              <p dangerouslySetInnerHTML={aboutUi} />
+            </Typography>
           </Grid>
         </Grid>
         <br />
@@ -244,7 +244,6 @@ class UserPage extends Component {
         </div>
         <br />
         <hr />
-        <p className={hiddenIfHasMessages}>This user has no posts yet.</p>
         {messagesUi}
       </div>
     );
