@@ -128,7 +128,6 @@ class Home extends Component {
               value='Search'
               onChange={event => {
                 searchVal = document.getElementById('searchIn', event).value;
-                console.log(searchVal);
               }}
             />
           </form>
