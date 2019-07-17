@@ -132,13 +132,6 @@ class Home extends Component {
               }}
             />
           </form>
-          <Button
-            onClick={submitSearch}
-            className={classes.submit}
-            variant='contained'
-            color='primary'>
-            Search
-          </Button>
         </div>
       </Grid>
     );

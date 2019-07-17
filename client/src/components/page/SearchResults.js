@@ -11,12 +11,13 @@ const searchParam = urlParams.get('query');
 const url = SEARCH_SERVLET + '?query=' + searchParam;
 const promises = Promise.all([fetch(url)]);
 
-const buildMessages = function(content) {
+const createSearchUi = function(message) {
   return (
     <Message
-      user={content.user}
-      timestamp={content.timestamp}
-      text={content.text}
+      key={message.id}
+      user={message.user}
+      timestamp={message.timestamp}
+      text={message.text}
     />
   );
 };
@@ -46,15 +47,11 @@ class SearchResults extends Component {
 
   render() {
     const { search } = this.state;
-    const searchUi = search ? search.content : null;
+    const searchUi = search
+      ? search.map(message => createSearchUi(message))
+      : null;
 
-    return (
-      <div>
-        {' '}
-        RESULTS PAGE
-        {searchUi}
-      </div>
-    );
+    return <div>{searchUi}</div>;
   }
 }
 

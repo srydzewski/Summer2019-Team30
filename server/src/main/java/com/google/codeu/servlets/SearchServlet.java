@@ -43,7 +43,7 @@ public class SearchServlet extends HttpServlet {
       return;
     }
 
-    String keyword = request.getParameter("search");
+    String keyword = request.getParameter("query");
 
     List<Message> messages = datastore.getAllMessages();
     List<Message> filteredMessages = new ArrayList<>();
@@ -61,7 +61,7 @@ public class SearchServlet extends HttpServlet {
       Gson modifiedGson = new Gson();
       String json = gson.toJson(filteredMessages);
       request.setAttribute("filteredMessages", filteredMessages);
-      response.getWriter().println(filteredMessages);
+      response.getWriter().println(json);
     }
   }
 
