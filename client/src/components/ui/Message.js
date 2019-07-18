@@ -54,7 +54,9 @@ class ImageCard extends React.Component {
     this.setState(prevState => ({ isFlipped: !prevState.isFlipped }));
   }
   render() {
-    const { classes, user, timestamp, text } = this.props;
+    var { user, timestamp, text } = this.props;
+    timestamp = new Date(timestamp);
+    timestamp = timestamp.toString();
     return (
       <div>
         <ReactCardFlip
@@ -85,48 +87,5 @@ class ImageCard extends React.Component {
     );
   }
 }
-
-class MessagesCard extends React.Component {
-  render() {
-    const { classes, user, timestamp, text } = this.props;
-
-    return (
-      <Card className={classes.card}>
-        <CardActionArea
-          onClick={event => {
-            MessagesCard();
-          }}>
-          <CardHeader title={user} subheader={timestamp} />
-
-          <CardContent>
-            <CardMedia>
-              <div dangerouslySetInnerHTML={{ __html: text }} />
-            </CardMedia>
-          </CardContent>
-        </CardActionArea>
-      </Card>
-    );
-  }
-}
-
-const Message = function(props) {
-  return (
-    <div className='Message message-div'>
-      <div className='message-header'>
-        {props.user + ' - ' + new Date(props.timestamp)}
-      </div>
-      <div dangerouslySetInnerHTML={{ __html: props.text }} />
-    </div>
-  );
-};
-
-Message.propTypes = {
-  /** Name of the user posting the message. */
-  user: PropTypes.string,
-  /** The timestamp of the message. */
-  timestamp: PropTypes.number,
-  /** The content of the message. */
-  text: PropTypes.string
-};
 
 export default withStyles(styles)(ImageCard);
