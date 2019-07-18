@@ -16,13 +16,14 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import CardActionArea from '@material-ui/core/CardActionArea';
+import { withStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
+import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Card from '@material-ui/core/Card';
-import ButtonBase from '@material-ui/core/ButtonBase';
-
+import ReactCardFlip from 'react-card-flip';
+import Typography from '@material-ui/core/Typography';
 /**
  * A message card.
  * @return The html representation of the card.
@@ -39,58 +40,74 @@ const styles = function() {
     }
   };
 };
-const style = function() {
-  return {
-    card: {
-      // flexDirection: 'row',
-      height: undefined,
-      width: undefined,
-      // alignSelf: 'center',
-      marginBottom: 3,
-      marginTop: 3,
-      borderRadius: 3
-    },
-    cardItem: {
-      borderLeftWidth: 5,
-      borderLeftColor: '#ea7e7a'
-    }
-  };
-};
 
- MessagesCard = function(props) {
-  return (
-    <div className='Message message-div'>
-      <CardActionArea>
-        <div className='message-header'>
-          <CardHeader title={props.user} subheader={props.timestamp} />
-        </div>
-        <CardContent>
-          <CardMedia>
-            {<div dangerouslySetInnerHTML={{ __html: props.text }} />}
-          </CardMedia>
-        </CardContent>
-      </CardActionArea>
-    </div>
-  );
-};
-const ImageCard = function(props) {
-  return (
-    <div>
-      <CardActionArea>
-        <ButtonBase
-          className={props.classes.cardAction}
-          onClick={event => {MessagesCard}
-          }>
+class ImageCard extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      isFlipped: false
+    };
+    this.handleClick = this.handleClick.bind(this);
+  }
+  handleClick(e) {
+    e.preventDefault();
+    this.setState(prevState => ({ isFlipped: !prevState.isFlipped }));
+  }
+  render() {
+    const { classes, user, timestamp, text } = this.props;
+    return (
+      <div>
+        <ReactCardFlip
+          isFlipped={this.state.isFlipped}
+          flipDirection='vertical'>
+          <Card key='front'>
+            <CardActionArea onClick={this.handleClick}>
+              <CardContent>
+                <CardMedia>
+                  {<div dangerouslySetInnerHTML={{ __html: text }} />}
+                </CardMedia>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+          <Card key='back'>
+            <CardActionArea onClick={this.handleClick}>
+              <CardHeader title={user} subheader={timestamp} />
+
+              <CardContent>
+                <CardMedia>
+                  <div dangerouslySetInnerHTML={{ __html: text }} />
+                </CardMedia>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </ReactCardFlip>
+      </div>
+    );
+  }
+}
+
+class MessagesCard extends React.Component {
+  render() {
+    const { classes, user, timestamp, text } = this.props;
+
+    return (
+      <Card className={classes.card}>
+        <CardActionArea
+          onClick={event => {
+            MessagesCard();
+          }}>
+          <CardHeader title={user} subheader={timestamp} />
+
           <CardContent>
             <CardMedia>
-              {<div dangerouslySetInnerHTML={{ __html: props.text }} />}
+              <div dangerouslySetInnerHTML={{ __html: text }} />
             </CardMedia>
           </CardContent>
-        </ButtonBase>
-      </CardActionArea>
-    </div>
-  );
-};
+        </CardActionArea>
+      </Card>
+    );
+  }
+}
 
 const Message = function(props) {
   return (
@@ -102,16 +119,7 @@ const Message = function(props) {
     </div>
   );
 };
-class CardUI extends React.Component{
-  render() {
-    return {
-      <div>
-    < ImageCard />
-    <MessagesCard />
-    </div>
-    }
-  }
-}
+
 Message.propTypes = {
   /** Name of the user posting the message. */
   user: PropTypes.string,
@@ -120,4 +128,5 @@ Message.propTypes = {
   /** The content of the message. */
   text: PropTypes.string
 };
-export default CardUI;
+
+export default withStyles(styles)(ImageCard);
