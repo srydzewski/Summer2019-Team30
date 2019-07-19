@@ -9,18 +9,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/blobstore-upload-url")
-/**
- * Servlet to get Blobstore Url, and redirect from request to MessageServlet
- */
+/** Servlet to get Blobstore Url, and redirect from request to MessageServlet */
 public class BlobstoreUploadUrlServlet extends HttpServlet {
-    @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+  @Override
+  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        // Get the Blobstore URL
-        BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
-        String uploadUrl = blobstoreService.createUploadUrl("/messages");
+    // Get the Blobstore URL
+    BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
+    String uploadUrl = blobstoreService.createUploadUrl("/messages");
 
-        response.setContentType("text/html");
-        response.getOutputStream().println(uploadUrl);
-    }
+    response.setContentType("text/html");
+    response.getOutputStream().println(uploadUrl);
+  }
 }

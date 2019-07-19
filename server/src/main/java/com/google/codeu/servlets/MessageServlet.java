@@ -24,19 +24,17 @@ import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
 import com.google.appengine.api.images.ImagesService;
 import com.google.appengine.api.images.ImagesServiceFactory;
 import com.google.appengine.api.images.ServingUrlOptions;
-
-import java.net.URI;
-import java.net.URL;
-import java.util.Map;
-import java.util.regex.*;
-
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.codeu.data.Datastore;
 import com.google.codeu.data.Message;
 import com.google.gson.Gson;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URL;
 import java.util.List;
+import java.util.Map;
+import java.util.regex.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -50,9 +48,11 @@ public class MessageServlet extends HttpServlet {
 
   private Datastore datastore;
 
-  private final static String imageReplacement = "<img src=\"$1\" />";
-  private final static String videoReplacement = "<video controls><source src=\"$1\" type=\"video/webm\"><source src = \"$1\" type = \"video/mp4\"></video>";
-  private final static String audioReplacement = "<audio controls><source src=\"$1\" type=\"audio/mp3\"><source src = \"$1\" type = \"audio/wav\"></audio>";
+  private static final String imageReplacement = "<img src=\"$1\" />";
+  private static final String videoReplacement =
+      "<video controls><source src=\"$1\" type=\"video/webm\"><source src = \"$1\" type = \"video/mp4\"></video>";
+  private static final String audioReplacement =
+      "<audio controls><source src=\"$1\" type=\"audio/mp3\"><source src = \"$1\" type = \"audio/wav\"></audio>";
 
   @Override
   public void init() {
@@ -60,8 +60,8 @@ public class MessageServlet extends HttpServlet {
   }
 
   /**
-   * Responds with a JSON representation of {@link Message} data for a specific
-   * user. Responds with an empty array if the user is not provided.
+   * Responds with a JSON representation of {@link Message} data for a specific user. Responds with
+   * an empty array if the user is not provided.
    */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -110,7 +110,6 @@ public class MessageServlet extends HttpServlet {
       for (int i = 0; i < imageBlobUrls.size(); i++) {
         // add image tag for the image user uploaded to Blobstore
         messageText += "<img src=\"" + imageBlobUrls.get(i) + "\" />";
-
       }
     }
 
@@ -122,8 +121,8 @@ public class MessageServlet extends HttpServlet {
   }
 
   /**
-   * Returns the BlobKey that points to the image files uploaded by the user, or
-   * null if the user didn't upload any image file.
+   * Returns the BlobKey that points to the image files uploaded by the user, or null if the user
+   * didn't upload any image file.
    */
   private List<BlobKey> getBlobKeys(HttpServletRequest request, String formInputElementName) {
     List<BlobKey> imageBlobKeys = new ArrayList<>();
@@ -150,7 +149,9 @@ public class MessageServlet extends HttpServlet {
     for (BlobKey blobK : blobKeys) {
       // Checking the validity of the file to make sure it's an image
       String fileType = new BlobInfoFactory().loadBlobInfo(blobK).getContentType().toLowerCase();
-      if (!(fileType.equals("image/jpg") || fileType.equals("image/jpeg") || fileType.equals("image/gif")
+      if (!(fileType.equals("image/jpg")
+          || fileType.equals("image/jpeg")
+          || fileType.equals("image/gif")
           || fileType.equals("image/png"))) {
         blobstoreService.delete(blobK);
       } else // blob is an image file
@@ -161,9 +162,7 @@ public class MessageServlet extends HttpServlet {
     return imageBlobKeys;
   }
 
-  /**
-   * Returns a list URL that points to the uploaded image files in Blobstore
-   */
+  /** Returns a list URL that points to the uploaded image files in Blobstore */
   private List<String> getUploadedFileUrl(List<BlobKey> imageBlobKeys) {
     // Use ImagesService to get a URL that points to the uploaded file.
     ImagesService imagesService = ImagesServiceFactory.getImagesService();
@@ -174,8 +173,9 @@ public class MessageServlet extends HttpServlet {
         try {
           // getting the image URL to the uploaded file
           ServingUrlOptions options = ServingUrlOptions.Builder.withBlobKey(blobK);
-          String imageUrl = imagesService.getServingUrl(options);// getServingUrl locks the blob, so it cannot be
-                                                                 // deleted with blobstoreService.delete(blobK);
+          String imageUrl =
+              imagesService.getServingUrl(options); // getServingUrl locks the blob, so it cannot be
+          // deleted with blobstoreService.delete(blobK);
           imageBlobUrls.add(imageUrl);
         } catch (IllegalArgumentException e) {
           System.out.println(e.getMessage());
@@ -187,11 +187,12 @@ public class MessageServlet extends HttpServlet {
   }
 
   /**
-   * Replaces valid image url in the message with image tag Does not change the
-   * strig message if there are no valid image urls
+   * Replaces valid image url in the message with image tag Does not change the strig message if
+   * there are no valid image urls
    */
   public String tagURLs(String message) {
-    String regex = "(https?://\\S*?\\.(?:png|PNG|html5|jpg|JPG|jpeg|JPEG|gif|GIF|mp4|MP4|webm|mp3|MP3|wav|WAV))";
+    String regex =
+        "(https?://\\S*?\\.(?:png|PNG|html5|jpg|JPG|jpeg|JPEG|gif|GIF|mp4|MP4|webm|mp3|MP3|wav|WAV))";
     Pattern pattern = Pattern.compile(regex);
     Matcher matcher = pattern.matcher(message);
 
@@ -227,10 +228,10 @@ public class MessageServlet extends HttpServlet {
       if (isUrlValid) {
         if (urls.get(i).toLowerCase().endsWith("mp4") || urls.get(i).toLowerCase().endsWith("webm"))
           urls.set(i, urls.get(i).replaceAll(regex, videoReplacement));
-        else if (urls.get(i).toLowerCase().endsWith("mp3") || urls.get(i).toLowerCase().endsWith("wav"))
+        else if (urls.get(i).toLowerCase().endsWith("mp3")
+            || urls.get(i).toLowerCase().endsWith("wav"))
           urls.set(i, urls.get(i).replaceAll(regex, audioReplacement));
-        else
-          urls.set(i, urls.get(i).replaceAll(regex, imageReplacement));
+        else urls.set(i, urls.get(i).replaceAll(regex, imageReplacement));
       }
     }
 
@@ -239,14 +240,12 @@ public class MessageServlet extends HttpServlet {
     if (firstMarchedUrlIndex == 0) {
       for (int i = 0; i < urls.size(); i++) {
         message += urls.get(i);
-        if (i + 1 < nonUrlTexts.length)
-          message += nonUrlTexts[i + 1];
+        if (i + 1 < nonUrlTexts.length) message += nonUrlTexts[i + 1];
       }
     } else {
       for (int i = 0; i < nonUrlTexts.length; i++) {
         message += nonUrlTexts[i];
-        if (i < urls.size())
-          message += urls.get(i);
+        if (i < urls.size()) message += urls.get(i);
       }
     }
 
@@ -254,8 +253,8 @@ public class MessageServlet extends HttpServlet {
   }
 
   /**
-   * Blobstore stores files as binary data. This function retrieves the binary
-   * data stored at the BlobKey parameter. return blob as byte array
+   * Blobstore stores files as binary data. This function retrieves the binary data stored at the
+   * BlobKey parameter. return blob as byte array
    */
   private byte[] getBlobBytes(BlobKey blobKey) throws IOException {
     BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
@@ -266,7 +265,8 @@ public class MessageServlet extends HttpServlet {
     boolean continueReading = true;
     while (continueReading) {
       // end index is inclusive, so we have to subtract 1 to get fetchSize bytes
-      byte[] b = blobstoreService.fetchData(blobKey, currentByteIndex, currentByteIndex + fetchSize - 1);
+      byte[] b =
+          blobstoreService.fetchData(blobKey, currentByteIndex, currentByteIndex + fetchSize - 1);
       outputBytes.write(b);
 
       // if we read fewer bytes than we requested, then we reached the end
@@ -279,5 +279,4 @@ public class MessageServlet extends HttpServlet {
 
     return outputBytes.toByteArray();
   }
-
 }
