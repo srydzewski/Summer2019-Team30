@@ -97,8 +97,8 @@ const createMessageUi = function(message) {
   );
 };
 
-const submitMessage = function() {
-  fetch(MESSAGE, {
+const submitMessage = async function() {
+  await fetch(MESSAGE, {
     method: 'POST',
     headers: new Headers({
       'Content-Type': 'application/x-www-form-urlencoded'
@@ -108,8 +108,8 @@ const submitMessage = function() {
   window.location.reload();
 };
 
-const submitAboutMe = function() {
-  fetch(ABOUT_ME_SERVLET, {
+const submitAboutMe = async function() {
+  await fetch(ABOUT_ME_SERVLET, {
     method: 'POST',
     headers: new Headers({
       'Content-Type': 'application/x-www-form-urlencoded'
@@ -177,17 +177,17 @@ class UserPage extends Component {
               src={profPic.content}
             />
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={4}>
             <Typography className={classes.header}>{userEmailParam}</Typography>
           </Grid>
           <Grid
             item
-            xs={6}
+            xs={5}
             style={{ height: 30, marginTop: 10, marginLeft: 60 }}>
-            <Typography className={classes.words} variant='h6'>
-              Enter your bio:
-            </Typography>
             <div className={hiddenIfViewingOther}>
+              <Typography className={classes.words} variant='h6'>
+                Enter your bio:
+              </Typography>
               <CKEditor
                 editor={ClassicEditor}
                 onInit={editor => {}}

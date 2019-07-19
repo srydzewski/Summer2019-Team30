@@ -24,8 +24,6 @@ import Message from 'components/ui/Message.js';
 import { HIDDEN } from 'constants/css.js';
 import CustomMap from 'components/ui/CustomMap.js';
 import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
-import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 
 const GOOGLE_MAPS_API_URL =
@@ -69,12 +67,12 @@ const buildMessages = function(content) {
   );
 };
 
-const submitRestaurant = function() {
+const submitRestaurant = async function() {
   if (!currRest.name || !currRest.address || !currRest.caption) {
     window.location.reload();
     return;
   } else {
-    fetch(RESTAURANT_SERVLET, {
+    await fetch(RESTAURANT_SERVLET, {
       method: 'POST',
       headers: new Headers({
         'Content-Type': 'application/x-www-form-urlencoded'
