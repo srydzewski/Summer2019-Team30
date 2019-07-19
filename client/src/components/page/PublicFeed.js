@@ -24,8 +24,6 @@ import Message from 'components/ui/Message.js';
 import { HIDDEN } from 'constants/css.js';
 import CustomMap from 'components/ui/CustomMap.js';
 import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
-import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 
 const GOOGLE_MAPS_API_URL =
