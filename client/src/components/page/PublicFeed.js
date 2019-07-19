@@ -67,12 +67,12 @@ const buildMessages = function(content) {
   );
 };
 
-const submitRestaurant = function() {
+const submitRestaurant = async function() {
   if (!currRest.name || !currRest.address || !currRest.caption) {
     window.location.reload();
     return;
   } else {
-    fetch(RESTAURANT_SERVLET, {
+    await fetch(RESTAURANT_SERVLET, {
       method: 'POST',
       headers: new Headers({
         'Content-Type': 'application/x-www-form-urlencoded'

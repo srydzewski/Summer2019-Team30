@@ -95,8 +95,8 @@ const createMessageUi = function(message) {
   );
 };
 
-const submitMessage = function() {
-  fetch(MESSAGE, {
+const submitMessage = async function() {
+  await fetch(MESSAGE, {
     method: 'POST',
     headers: new Headers({
       'Content-Type': 'application/x-www-form-urlencoded'
@@ -106,8 +106,8 @@ const submitMessage = function() {
   window.location.reload();
 };
 
-const submitAboutMe = function() {
-  fetch(ABOUT_ME_SERVLET, {
+const submitAboutMe = async function() {
+  await fetch(ABOUT_ME_SERVLET, {
     method: 'POST',
     headers: new Headers({
       'Content-Type': 'application/x-www-form-urlencoded'
