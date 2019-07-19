@@ -9,6 +9,7 @@
     "@material-ui/icons": "^3.0.2",
     "ckeditor": "^4.12.1",
     "react": "^16.8.6",
+    "react-card-flip": "^0.8.0",
     "react-dom": "^16.8.6",
     "react-google-maps": "^9.4.5",
     "react-hashtag": "^2.1.2",
